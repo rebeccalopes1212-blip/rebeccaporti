@@ -815,9 +815,12 @@ const GlobalStyles = () => (
       pointer-events: none;
       overflow: hidden;
     }
-    .spline-bg spline-viewer { width: 100%; height: 100%; }
-    /* hide the default Spline watermark so it reads as a clean background */
-    .spline-bg spline-viewer::part(logo) { display: none !important; }
+    /* overflow hack: viewer is 80px taller than its container, and the
+       parent (.spline-bg) clips it, chopping off the enforced watermark */
+    .spline-bg spline-viewer {
+      width: 100%;
+      height: calc(100% + 80px);
+    }
     .hero-fade {
       position: absolute;
       left: 0; right: 0; bottom: 0;
@@ -1106,7 +1109,7 @@ function SplineBackground() {
       <spline-viewer
         url={SPLINE_SCENE}
         loading-anim-type="none"
-        style={{ width: "100%", height: "100%", display: "block" }}
+        style={{ width: "100%", height: "calc(100% + 80px)", display: "block" }}
       ></spline-viewer>
     </div>
   );
