@@ -794,28 +794,26 @@ const GlobalStyles = () => (
 
     /* ---- Hero: Spline 3D background ---- */
     .hero-rlp {
-      min-height: min(92vh, 820px);
+      min-height: 100vh;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       isolation: isolate;
       padding-top: 110px;
     }
+    /* physical "stage" below the CTAs so the 3D wave has room to breathe */
+    .hero-rlp .container-rlp { padding-bottom: 220px; }
     @media (min-width: 768px) {
-      .hero-rlp { padding-top: 160px; }
+      .hero-rlp { padding-top: 160px; align-items: center; }
+      .hero-rlp .container-rlp { padding-bottom: 100px; }
     }
     .spline-bg {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
+      transform: none;
       z-index: 0;
       pointer-events: none;
       overflow: hidden;
-      /* push the 3D wave down into the empty space below the CTAs.
-         mobile stacks taller, so it needs a larger downward shift. */
-      transform: translateY(32%);
-    }
-    @media (min-width: 768px) {
-      .spline-bg { transform: translateY(14%); }
     }
     .spline-bg spline-viewer { width: 100%; height: 100%; }
     /* hide the default Spline watermark so it reads as a clean background */
@@ -823,12 +821,12 @@ const GlobalStyles = () => (
     .hero-fade {
       position: absolute;
       left: 0; right: 0; bottom: 0;
-      height: 62%;
+      height: 38%;
       z-index: 1;
       pointer-events: none;
       background: linear-gradient(180deg,
         rgba(0,0,0,0) 0%,
-        var(--bg) 88%);
+        var(--bg) 92%);
     }
     .rlp-root[data-theme='light'] .hero-fade {
       background: linear-gradient(180deg,
