@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rebecca Lopes — Product Marketing & Growth</title>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
+</head>
+<body style="margin:0;">
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useRef, useCallback } = React;
+
+
+/* ============================================================
+   CONTENT — all copy lives here, in English and Portuguese.
+   Update CONTACT_INFO with real links (search for it below).
+   ============================================================ */
+
+const CONTENT = {
+  en: {
+    nav: {
+      about: "About",
+      philosophy: "Philosophy",
+      work: "Work",
+      howIThink: "How I Think",
+      gtm: "GTM",
+      contact: "Contact",
+      backToWork: "← Back to work",
+    },
+    hero: {
+      eyebrow: "Rebecca Lopes — Product Marketing · Growth · AI",
+      badge: "⚡ Gen Z Growth Hacks",
+      headlinePre: "Building products people ",
+      headlineEm: "understand",
+      headlinePost: ", adopt, and love.",
+      subtitle:
+        "I work at the intersection of product marketing, Gen Z growth hacking, and AI — turning youth behavior into positioning, and positioning into products people choose without being sold to.",
+      ctaWork: "View my work",
+      ctaConnect: "Let's connect",
+    },
+    about: {
+      eyebrow: "The short version",
+      heading: "From spreadsheets to shipped products.",
+      p1: "I started in finance — learning to read a business before trying to grow one. Analytics turned that instinct into a habit. Product Operations turned it into a job. Product Marketing turned it into a craft.",
+      p2: "Today I build first and let the proof follow — AI products, curriculum platforms, and an e-commerce brand, from nothing.",
+    },
+    timeline: [
+      { year: "Start", title: "Finance", copy: "Learned to read a business before trying to grow one." },
+      { year: "Next", title: "Analytics", copy: "Stopped asking what happened, started asking why." },
+      { year: "Then", title: "Product Operations", copy: "Close enough to the product to see where it broke." },
+      { year: "Then", title: "Senior Performance Analyst", copy: "Media, data, and product decisions in one conversation." },
+      { year: "Then", title: "Product Marketing & Growth Lead", copy: "Built the marketing function from scratch." },
+      { year: "Now", title: "Independent Builder", copy: "Building AI products and e-commerce from nothing." },
+    ],
+    philosophy: {
+      eyebrow: "How I see the work",
+      headingPre: "Product marketing isn't a launch. It's ",
+      headingEm: "clarity",
+      headingPost: ", delivered on time.",
+      statements: [
+        "People don't buy features. They buy confidence that this is the right decision.",
+        "Positioning isn't a tagline. It's the shortest path between what you built and what someone already believes.",
+        "Every product deserves a story customers understand before they finish reading it.",
+        "Great GTM doesn't create demand. It removes the friction between demand and belief.",
+      ],
+      signalCaption: "Noise becomes signal",
+    },
+    work: {
+      eyebrow: "Featured work",
+      heading: "Five products. Five different starting points. The same instinct.",
+      readCase: "Read case →",
+      inProgress: "In progress",
+    },
+    howIThink: {
+      eyebrow: "How I think",
+      heading: "One line, ten steps, no shortcuts.",
+      subtitle:
+        "Every product I've touched moved through this same sequence — in this order, because skipping a step just means paying for it later, with interest.",
+      steps: [
+        "Research", "Customer Interviews", "Behavior", "Insights", "Positioning",
+        "Messaging", "Experimentation", "Measurement", "Iteration", "Growth",
+      ],
+    },
+    gtm: {
+      eyebrow: "My GTM framework",
+      heading: "Ten decisions, made in order, before a single ad runs.",
+      items: [
+        { title: "Market Research", copy: "Understand the category before claiming a place in it." },
+        { title: "Competitive Analysis", copy: "Know what's already believed, so you're not repeating it." },
+        { title: "ICP", copy: "Define who this is actually for — and who it deliberately isn't." },
+        { title: "Positioning", copy: "The one true thing that makes the rest of the story make sense." },
+        { title: "Messaging", copy: "Positioning, translated into words a customer would actually say." },
+        { title: "Launch", copy: "The moment belief and access arrive for the customer at the same time." },
+        { title: "Sales Enablement", copy: "Give the story to the people repeating it on your behalf." },
+        { title: "Lifecycle", copy: "What keeps a customer convinced after the first purchase." },
+        { title: "Growth", copy: "Compounding the moments that already convert, deliberately." },
+        { title: "KPIs", copy: "The few numbers that would actually change a decision." },
+      ],
+    },
+    aiInfra: {
+      eyebrow: "AI & development infrastructure",
+      heading: "I don't just prompt AI. I ship with it.",
+      groups: [
+        { label: "Models", items: ["ChatGPT", "Claude", "Gemini", "Meta AI"] },
+        { label: "Build & Ship", items: ["Lovable", "Cursor", "Vercel", "GitHub", "Supabase"] },
+        { label: "Automation", items: ["Make", "Zapier"] },
+        { label: "Craft", items: ["Prompt Engineering", "Custom GPTs", "Fireflies Transcription"] },
+      ],
+    },
+    toolbox: {
+      eyebrow: "Toolbox",
+      heading: "The stack behind the work.",
+      groups: [
+        { label: "Product Marketing & Growth", items: ["Positioning", "GTM Strategy", "Lifecycle Marketing", "Storytelling"] },
+        { label: "Paid Media", items: ["Meta Ads", "Google Ads", "TikTok for Business"] },
+        { label: "Data & Analytics", items: ["SQL", "GA4", "Looker", "HubSpot"] },
+        { label: "Design & Content", items: ["Figma", "CapCut"] },
+        { label: "Systems", items: ["Notion", "AI Tooling", "Automation"] },
+      ],
+    },
+    contact: {
+      eyebrow: "Get in touch",
+      headingPre: "Let's build something customers ",
+      headingEm: "love",
+      headingPost: ".",
+      emailBtn: "Email me",
+      linkedinBtn: "Connect on LinkedIn",
+      nameLabel: "Name",
+      basedLabel: "Based in",
+      emailLabel: "Email",
+    },
+    footer: { tagline: "Product Marketing × Growth × AI" },
+    caseLabels: {
+      caseStudy: "Case study",
+      challenge: "The Challenge",
+      hypothesis: "The Hypothesis",
+      execution: "Execution",
+      roadmap: "Roadmap",
+      future: "Future Vision",
+      lessons: "Lessons Learned",
+      results: "Results",
+    },
+  },
+
+  pt: {
+    nav: {
+      about: "Sobre",
+      philosophy: "Filosofia",
+      work: "Projetos",
+      howIThink: "Como Penso",
+      gtm: "GTM",
+      contact: "Contato",
+      backToWork: "← Voltar aos projetos",
+    },
+    hero: {
+      eyebrow: "Rebecca Lopes — Marketing de Produto · Growth · IA",
+      badge: "⚡ Hacks de Growth pra Geração Z",
+      headlinePre: "Construindo produtos que as pessoas ",
+      headlineEm: "entendem",
+      headlinePost: ", adotam e amam.",
+      subtitle:
+        "Trabalho na interseção entre marketing de produto, growth hacking pra Geração Z e IA — transformando comportamento em posicionamento, e posicionamento em produtos que as pessoas escolhem sem serem vendidos.",
+      ctaWork: "Ver meus projetos",
+      ctaConnect: "Vamos conversar",
+    },
+    about: {
+      eyebrow: "A versão resumida",
+      heading: "De planilhas a produtos no ar.",
+      p1: "Comecei nas finanças — aprendendo a ler um negócio antes de tentar fazê-lo crescer. Analytics transformou esse instinto em hábito. Operações de Produto transformou em função. Marketing de Produto transformou em ofício.",
+      p2: "Hoje eu construo primeiro e deixo a prova vir depois — produtos de IA, plataformas de curso e uma marca de e-commerce, do zero.",
+    },
+    timeline: [
+      { year: "Início", title: "Finanças", copy: "Aprendi a ler um negócio antes de tentar fazê-lo crescer." },
+      { year: "Depois", title: "Analytics", copy: "Parei de perguntar o que aconteceu e comecei a perguntar por quê." },
+      { year: "Depois", title: "Operações de Produto", copy: "Perto o suficiente do produto pra ver onde ele quebrava." },
+      { year: "Depois", title: "Analista de Performance Sênior", copy: "Mídia, dados e decisões de produto na mesma conversa." },
+      { year: "Depois", title: "Head de Marketing & Growth", copy: "Construí a operação de marketing do zero." },
+      { year: "Hoje", title: "Builder Independente", copy: "Construindo produtos de IA e e-commerce do zero." },
+    ],
+    philosophy: {
+      eyebrow: "Como vejo o trabalho",
+      headingPre: "Marketing de produto não é lançamento. É ",
+      headingEm: "clareza",
+      headingPost: ", entregue no tempo certo.",
+      statements: [
+        "As pessoas não compram funcionalidades. Compram a confiança de que essa é a decisão certa.",
+        "Posicionamento não é slogan. É o caminho mais curto entre o que você construiu e o que a pessoa já acredita.",
+        "Todo produto merece uma história que o cliente entende antes de terminar de ler.",
+        "GTM de verdade não cria demanda. Ele remove o atrito entre a demanda e a crença.",
+      ],
+      signalCaption: "Ruído se transforma em sinal",
+    },
+    work: {
+      eyebrow: "Projetos em destaque",
+      heading: "Cinco produtos. Cinco pontos de partida diferentes. O mesmo instinto.",
+      readCase: "Ver estudo de caso →",
+      inProgress: "Em andamento",
+    },
+    howIThink: {
+      eyebrow: "Como penso",
+      heading: "Uma linha, dez passos, sem atalho.",
+      subtitle:
+        "Todo produto que já toquei passou por essa mesma sequência — nessa ordem, porque pular um passo só significa pagar por ele depois, com juros.",
+      steps: [
+        "Pesquisa", "Entrevistas com Clientes", "Comportamento", "Insights", "Posicionamento",
+        "Mensagem", "Experimentação", "Medição", "Iteração", "Growth",
+      ],
+    },
+    gtm: {
+      eyebrow: "Meu framework de GTM",
+      heading: "Dez decisões, tomadas em ordem, antes de rodar um único anúncio.",
+      items: [
+        { title: "Pesquisa de Mercado", copy: "Entender a categoria antes de reivindicar um lugar nela." },
+        { title: "Análise Competitiva", copy: "Saber no que já se acredita, pra não repetir." },
+        { title: "ICP", copy: "Definir pra quem isso é de verdade — e pra quem definitivamente não é." },
+        { title: "Posicionamento", copy: "A única verdade que faz o resto da história fazer sentido." },
+        { title: "Mensagem", copy: "Posicionamento traduzido pra palavras que o cliente realmente diria." },
+        { title: "Lançamento", copy: "O momento em que crença e acesso chegam juntos pro cliente." },
+        { title: "Capacitação de Vendas", copy: "Dar a história pra quem vai repeti-la em seu nome." },
+        { title: "Lifecycle", copy: "O que mantém o cliente convencido depois da primeira compra." },
+        { title: "Growth", copy: "Potencializar os momentos que já convertem, de propósito." },
+        { title: "KPIs", copy: "Os poucos números que realmente mudariam uma decisão." },
+      ],
+    },
+    aiInfra: {
+      eyebrow: "Infraestrutura de IA & desenvolvimento",
+      heading: "Eu não só uso IA. Eu lanço produto com ela.",
+      groups: [
+        { label: "Modelos", items: ["ChatGPT", "Claude", "Gemini", "Meta AI"] },
+        { label: "Construção & Deploy", items: ["Lovable", "Cursor", "Vercel", "GitHub", "Supabase"] },
+        { label: "Automação", items: ["Make", "Zapier"] },
+        { label: "Ofício", items: ["Prompt Engineering", "GPTs Personalizados", "Transcrição com Fireflies"] },
+      ],
+    },
+    toolbox: {
+      eyebrow: "Caixa de ferramentas",
+      heading: "O stack por trás do trabalho.",
+      groups: [
+        { label: "Marketing de Produto & Growth", items: ["Posicionamento", "Estratégia de GTM", "Lifecycle Marketing", "Storytelling"] },
+        { label: "Mídia Paga", items: ["Meta Ads", "Google Ads", "TikTok for Business"] },
+        { label: "Dados & Analytics", items: ["SQL", "GA4", "Looker", "HubSpot"] },
+        { label: "Design & Conteúdo", items: ["Figma", "CapCut"] },
+        { label: "Sistemas", items: ["Notion", "Ferramentas de IA", "Automação"] },
+      ],
+    },
+    contact: {
+      eyebrow: "Entre em contato",
+      headingPre: "Vamos construir algo que os clientes ",
+      headingEm: "amam",
+      headingPost: ".",
+      emailBtn: "Me mandar um email",
+      linkedinBtn: "Conectar no LinkedIn",
+      nameLabel: "Nome",
+      basedLabel: "Localização",
+      emailLabel: "Email",
+    },
+    footer: { tagline: "Marketing de Produto × Growth × IA" },
+    caseLabels: {
+      caseStudy: "Estudo de caso",
+      challenge: "O Desafio",
+      hypothesis: "A Hipótese",
+      execution: "Execução",
+      roadmap: "Roadmap",
+      future: "Visão de Futuro",
+      lessons: "Aprendizados",
+      results: "Resultados",
+    },
+  },
+};
+
+/* ============================================================
+   CASE STUDIES — English and Portuguese, fully separate arrays
+   ============================================================ */
+
+const CASES = {
+  en: [
+    {
+      slug: "refuturiza", index: "01", company: "Refuturiza",
+      role: "Product Marketing & Growth Lead",
+      hook: "Technical education wasn't built to hold Gen Z's attention. So we stopped marketing it and started producing it.",
+      heroStat: { value: "R$100K+", label: "monthly revenue, from zero" },
+      challenge: "Refuturiza teaches Air Conditioning, Electrical, Aesthetics, and Security Camera trades — real, employable skills. But the marketing spoke like a syllabus: modules, certificates, schedules. Gen Z scrolled past all of it.",
+      hypothesis: "Stop marketing the education. Produce the entertainment people already choose to watch, and let the transformation sell the course.",
+      execution: [
+        "Produced an original reality-format series following students' transformation, episode by episode — built for the feed, not the brochure.",
+        "Ran VIP webinars that positioned Air Conditioning and Electrical courses as career decisions, not classes to sit through.",
+        "Built \"Calculadora do Técnico\", a custom AI tool that turned income curiosity into a qualified lead in under sixty seconds.",
+        "Wrote for TikTok's native grammar — short-form hooks tuned to attention span and identity, not features.",
+        "Replaced feature-based copy (\"12 modules, certificate included\") with positioning built on who the student becomes.",
+      ],
+      results: [
+        { value: "R$100K+", label: "Monthly revenue generated from zero" },
+        { value: "200%", label: "Increase in course adoption" },
+        { value: "56%", label: "Return on ad spend" },
+        { value: "100K+", label: "Subscribers reached organically" },
+      ],
+      lessons: "Attention is earned scene by scene, not bought in a media slot. Once students saw themselves in the story before they saw the syllabus, marketing stopped selling and started recruiting.",
+      status: "live",
+    },
+    {
+      slug: "gift", index: "02", company: "GIFT · English",
+      role: "Founder & Product Builder",
+      hook: "English platforms teach in isolation. Nobody stays motivated alone — so belonging became the product.",
+      heroStat: { value: "60", label: "lessons shipped in the MVP" },
+      challenge: "Most English platforms are self-paced to the point of being solitary. Motivation decays fast when no one is watching, and feedback arrives too late — or never.",
+      hypothesis: "If learning felt like belonging to something — a challenge, a cohort, a streak worth protecting — retention would follow naturally.",
+      execution: [
+        "Designed an AI-powered English platform and launched it publicly through the \"Glow Up English\" challenge.",
+        "Built a 60-lesson curriculum structured for compounding, visible progress rather than isolated units.",
+        "Integrated AI-driven pronunciation feedback and a conversational practice bot for correction in the moment, not a week later.",
+        "Designed gamified onboarding, streaks, and community mechanics so progress felt social, not solitary.",
+        "Took the product from concept to a working MVP in three months.",
+      ],
+      results: [
+        { value: "60", label: "Lessons across 6 structured modules" },
+        { value: "3 mo", label: "From concept to working MVP" },
+        { value: "AI", label: "Real-time pronunciation feedback" },
+      ],
+      lessons: "A curriculum teaches content. A challenge teaches commitment. GIFT only started working once we designed for the second thing and let the first thing ride along.",
+      roadmap: [
+        "Expand the AI Coach into a full conversational partner with memory across sessions.",
+        "Layer in live class booking so the platform bridges self-paced and human practice.",
+        "Introduce a public leaderboard and cohort-based challenges to compound the belonging effect.",
+      ],
+      future: "The long-term bet isn't a better English app. It's a template for how AI-native learning products should feel — measured, social, and honest about how people actually build a habit.",
+      status: "live",
+    },
+    {
+      slug: "angel-joias", index: "03", company: "Angel Joias",
+      role: "Founder, Ops & Growth",
+      hook: "A jewelry brand built from zero — domain to delivery, live to loyal customer.",
+      heroStat: { value: "60%", label: "conversion rate on live sessions" },
+      challenge: "Launching a 925 silver and Swarovski accessories brand with no existing audience, no budget cushion, and no infrastructure to fall back on.",
+      hypothesis: "Live commerce could compress discovery and decision into a single moment — if the story and the product were both right in real time.",
+      execution: [
+        "Set up domain infrastructure, supply chain, and pricing from a blank page.",
+        "Ran high-converting TikTok Live Commerce sessions paired with targeted Meta Ads to drive live traffic.",
+        "Applied customer psychology in the moment — scarcity, social proof, live objection handling — to convert viewers while they were still watching.",
+        "Built community engagement loops and tracked performance end-to-end through Short.io.",
+      ],
+      results: [
+        { value: "60%", label: "Conversion rate during live sessions" },
+        { value: "R$25K", label: "Monthly revenue" },
+      ],
+      lessons: "Live commerce rewards the same discipline as a good sales page — clear offer, real urgency, fast answers — it just removes the luxury of editing yourself before you speak.",
+      status: "live",
+    },
+    {
+      slug: "riviera-laudos", index: "04", company: "Riviera Laudos",
+      role: "Founder, GTM & Product",
+      hook: "Manual building inspections take weeks. Drones and AI can make same-day the standard.",
+      heroStat: { value: "0 → 1", label: "building the GTM engine now" },
+      challenge: "Technical building inspections still run on manual measurement and slow turnaround — a commodity service priced by hours, not outcomes.",
+      hypothesis: "Drones and AI can turn a two-week inspection into a same-day report, and a same-day report can be sold as a premium outcome, not a discounted hour rate.",
+      execution: [
+        "Structuring the go-to-market strategy for an AI- and drone-powered technical inspection service.",
+        "Defining pricing models built around speed and precision instead of hours billed.",
+        "Deploying conversion-focused landing pages to validate demand ahead of full launch.",
+      ],
+      results: [{ value: "0 → 1", label: "Currently validating demand and pricing" }],
+      lessons: "Building the second product is different from building the first — the questions get sharper because you already know which ones actually mattered.",
+      status: "progress",
+    },
+    {
+      slug: "quintoandar", index: "05", company: "QuintoAndar",
+      role: "QA & Performance, Product Operations",
+      hook: "A fast-scaling partner network needed one clear channel instead of five disconnected ones.",
+      heroStat: { value: "+5pp", label: "NPS in the first month" },
+      challenge: "Partners lacked a dedicated channel for workflow and communication, creating friction across a rapidly scaling operation and inconsistent visibility into what was actually working.",
+      hypothesis: "A purpose-built partner app would reduce friction more effectively than another round of process fixes layered onto disconnected tools.",
+      execution: [
+        "Designed and shipped a dedicated partner-facing mobile app to streamline workflow and communication.",
+        "Improved cross-functional collaboration between operations and product teams around a shared source of truth.",
+        "Built behavioral analysis dashboards to track engagement and performance at scale.",
+      ],
+      results: [
+        { value: "+5pp", label: "NPS improvement within the first month" },
+        { value: "↑", label: "Partner engagement and app adoption" },
+      ],
+      lessons: "The best product operations work is invisible when it's done right — partners just noticed that things stopped breaking.",
+      status: "live",
+    },
+  ],
+
+  pt: [
+    {
+      slug: "refuturiza", index: "01", company: "Refuturiza",
+      role: "Head de Marketing de Produto & Growth",
+      hook: "A educação técnica não estava feita pra prender a atenção da Geração Z. Então paramos de anunciar o curso e começamos a produzir conteúdo que eles escolhiam assistir.",
+      heroStat: { value: "R$100K+", label: "faturamento mensal, saindo do zero" },
+      challenge: "A Refuturiza ensina Ar Condicionado, Elétrica, Estética e Câmeras de Segurança — profissões reais e empregáveis. Mas o marketing falava como grade curricular: módulos, certificado, horário. A Geração Z passava direto.",
+      hypothesis: "Parar de anunciar o curso. Produzir o entretenimento que as pessoas já escolhem assistir, e deixar a transformação vender o curso.",
+      execution: [
+        "Produzimos uma série em formato reality acompanhando a transformação dos alunos, episódio por episódio — feita pro feed, não pro folder.",
+        "Fizemos webinars VIP posicionando os cursos de Ar Condicionado e Elétrica como decisão de carreira, não aula pra assistir.",
+        "Construímos a \"Calculadora do Técnico\", uma ferramenta de IA que transformava curiosidade sobre renda em lead qualificado em menos de sessenta segundos.",
+        "Escrevemos na gramática nativa do TikTok — ganchos curtos calibrados pra atenção e identidade, não pra funcionalidade.",
+        "Substituímos texto de funcionalidade (\"12 módulos, certificado incluso\") por posicionamento construído em torno de quem o aluno se torna.",
+      ],
+      results: [
+        { value: "R$100K+", label: "Faturamento mensal gerado do zero" },
+        { value: "200%", label: "Aumento na adoção do curso" },
+        { value: "56%", label: "Retorno sobre investimento em mídia" },
+        { value: "100K+", label: "Inscritos alcançados organicamente" },
+      ],
+      lessons: "Atenção se conquista cena por cena, não se compra em mídia. Quando os alunos se viram na história antes de ver a grade curricular, o marketing parou de vender e começou a recrutar.",
+      status: "live",
+    },
+    {
+      slug: "gift", index: "02", company: "GIFT · English",
+      role: "Fundadora & Product Builder",
+      hook: "Plataformas de inglês ensinam isoladamente. Sozinha, ninguém se mantém motivado — então pertencimento se tornou o produto.",
+      heroStat: { value: "60", label: "aulas lançadas no MVP" },
+      challenge: "A maioria das plataformas de inglês é tão autodirigida que se torna solitária. A motivação cai rápido quando ninguém está olhando, e o feedback chega tarde demais — ou nunca.",
+      hypothesis: "Se aprender parecesse pertencer a algo — um desafio, uma turma, uma sequência que vale a pena proteger — a retenção viria naturalmente.",
+      execution: [
+        "Desenhei uma plataforma de inglês com IA e lancei publicamente através do desafio \"Glow Up English\".",
+        "Construí um currículo de 60 aulas estruturado pra progresso visível e cumulativo, não unidades isoladas.",
+        "Integrei feedback de pronúncia com IA e um bot de prática conversacional pra correção no momento, não uma semana depois.",
+        "Desenhei onboarding gamificado, sequências (streaks) e mecânicas de comunidade pra que o progresso parecesse social, não solitário.",
+        "Levei o produto do conceito a um MVP funcional em três meses.",
+      ],
+      results: [
+        { value: "60", label: "Aulas em 6 módulos estruturados" },
+        { value: "3 mo", label: "Do conceito ao MVP funcional" },
+        { value: "IA", label: "Feedback de pronúncia em tempo real" },
+      ],
+      lessons: "Um currículo ensina conteúdo. Um desafio ensina compromisso. O GIFT só funcionou de verdade quando desenhamos pro segundo e deixamos o primeiro seguir junto.",
+      roadmap: [
+        "Expandir o AI Coach pra um parceiro conversacional completo, com memória entre sessões.",
+        "Adicionar agendamento de aulas em vivo pra conectar o autodirigido com a prática humana.",
+        "Lançar ranking público e desafios por turma pra potencializar o efeito de pertencimento.",
+      ],
+      future: "A aposta de longo prazo não é um app de inglês melhor. É um modelo de como produtos de aprendizado nativos em IA deveriam parecer — medidos, sociais e honestos sobre como as pessoas realmente constroem um hábito.",
+      status: "live",
+    },
+    {
+      slug: "angel-joias", index: "03", company: "Angel Joias",
+      role: "Fundadora, Operações & Growth",
+      hook: "Uma marca de joias construída do zero — do domínio à entrega, da live à cliente fiel.",
+      heroStat: { value: "60%", label: "de conversão nas lives" },
+      challenge: "Lançar uma marca de acessórios em prata 925 e Swarovski sem audiência existente, sem colchão de orçamento e sem infraestrutura pra se apoiar.",
+      hypothesis: "Live commerce poderia comprimir descoberta e decisão em um único momento — se a história e o produto estivessem certos em tempo real.",
+      execution: [
+        "Montei infraestrutura de domínio, cadeia de suprimentos e precificação a partir de uma página em branco.",
+        "Fiz lives de alta conversão no TikTok Live Commerce combinadas com Meta Ads direcionados pra levar tráfego pra live.",
+        "Apliquei psicologia do consumidor em tempo real — escassez, prova social, quebra de objeção ao vivo — pra converter quem estava assistindo.",
+        "Construí loops de engajamento de comunidade e rastreei performance de ponta a ponta com Short.io.",
+      ],
+      results: [
+        { value: "60%", label: "Taxa de conversão durante as lives" },
+        { value: "R$25K", label: "Faturamento mensal" },
+      ],
+      lessons: "Live commerce exige a mesma disciplina de uma boa página de vendas — oferta clara, urgência real, resposta rápida — só que sem o luxo de editar o que você fala.",
+      status: "live",
+    },
+    {
+      slug: "riviera-laudos", index: "04", company: "Riviera Laudos",
+      role: "Fundadora, GTM & Produto",
+      hook: "Laudos de inspeção manuais levam semanas. Drones e IA podem tornar o mesmo dia o padrão.",
+      heroStat: { value: "0 → 1", label: "construindo o motor de GTM agora" },
+      challenge: "Laudos técnicos de inspeção predial ainda rodam em medição manual e prazo longo — um serviço comoditizado, precificado por hora.",
+      hypothesis: "Drones e IA podem transformar uma inspeção de duas semanas em um laudo no mesmo dia — e um laudo no mesmo dia pode ser vendido como resultado premium, não como hora com desconto.",
+      execution: [
+        "Estruturando a estratégia de go-to-market pra um serviço de inspeção técnica com IA e drones.",
+        "Definindo modelos de precificação construídos em torno de velocidade e precisão, não hora faturada.",
+        "Lançando landing pages focadas em conversão pra validar demanda antes do lançamento completo.",
+      ],
+      results: [{ value: "0 → 1", label: "Validando demanda e precificação agora" }],
+      lessons: "Construir o segundo produto é diferente de construir o primeiro — as perguntas ficam mais afiadas porque você já sabe quais realmente importaram.",
+      status: "progress",
+    },
+    {
+      slug: "quintoandar", index: "05", company: "QuintoAndar",
+      role: "QA & Performance, Operações de Produto",
+      hook: "Uma rede de parceiros crescendo rápido precisava de um canal claro em vez de cinco desconectados.",
+      heroStat: { value: "+5pp", label: "de NPS no primeiro mês" },
+      challenge: "Parceiros não tinham um canal dedicado pra fluxo de trabalho e comunicação, criando atrito numa operação em escala acelerada e pouca visibilidade sobre o que realmente funcionava.",
+      hypothesis: "Um app dedicado pros parceiros reduziria o atrito de forma mais eficaz do que mais uma rodada de ajuste de processo em ferramentas desconectadas.",
+      execution: [
+        "Desenhamos e lançamos um aplicativo mobile dedicado aos parceiros pra otimizar fluxo de trabalho e comunicação.",
+        "Melhoramos a colaboração entre operações e produto em torno de uma única fonte de verdade.",
+        "Construímos dashboards de análise comportamental pra acompanhar engajamento e performance em escala.",
+      ],
+      results: [
+        { value: "+5pp", label: "Melhora de NPS no primeiro mês" },
+        { value: "↑", label: "Engajamento e adoção dos parceiros" },
+      ],
+      lessons: "O melhor trabalho de operações de produto é invisível quando bem feito — os parceiros só notaram que as coisas pararam de quebrar.",
+      status: "live",
+    },
+  ],
+};
+
+/* ============================================================
+   GLOBAL STYLES — accent is now blue, per request
+   ============================================================ */
+
+const GlobalStyles = () => (
+  <style>{`
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+    .rlp-root {
+      --bg: #0D0F13;
+      --bg-elevated: #14171D;
+      --surface: #171B22;
+      --border: rgba(255,255,255,0.09);
+      --border-strong: rgba(255,255,255,0.16);
+      --text: #F2F1EC;
+      --text-muted: #9CA0AC;
+      --text-faint: #6B6F7B;
+      --accent: #4C8DFF;
+      --accent-strong: #78ACFF;
+      --accent-ink: #071224;
+      --accent-glow: rgba(76,141,255,0.32);
+      --shadow: 0 24px 60px rgba(0,0,0,0.45);
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: background 0.4s ease, color 0.4s ease;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    .rlp-root[data-theme='light'] {
+      --bg: #FAF9F5;
+      --bg-elevated: #FFFFFF;
+      --surface: #FFFFFF;
+      --border: rgba(20,17,10,0.09);
+      --border-strong: rgba(20,17,10,0.18);
+      --text: #16181D;
+      --text-muted: #585C67;
+      --text-faint: #8A8E97;
+      --accent: #2158D6;
+      --accent-strong: #17409E;
+      --accent-ink: #FFFFFF;
+      --accent-glow: rgba(33,88,214,0.20);
+      --shadow: 0 24px 60px rgba(20,30,50,0.10);
+    }
+
+    .rlp-root * { box-sizing: border-box; }
+
+    .f-display {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+    }
+    .f-display em { font-style: italic; color: var(--accent); font-weight: 500; }
+    .f-mono {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 500;
+    }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .container-rlp {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    @media (min-width: 768px) {
+      .container-rlp { padding-left: 40px; padding-right: 40px; }
+    }
+
+    .section-rlp { padding-top: 110px; padding-bottom: 30px; position: relative; }
+    @media (min-width: 768px) {
+      .section-rlp { padding-top: 150px; }
+    }
+
+    .btn {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 13px 26px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); }
+    .btn-primary:hover { background: var(--accent-strong); box-shadow: 0 10px 30px var(--accent-glow); transform: translateY(-1px); }
+    .btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--text-muted); padding: 8px 4px; }
+    .btn-ghost:hover { color: var(--accent); }
+
+    .card-rlp {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    .card-rlp:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .hr-rlp { height: 1px; background: var(--border); border: none; width: 100%; }
+
+    .nav-rlp {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .rlp-root[data-theme='dark'] .nav-rlp { background: rgba(13,15,19,0.72); }
+    .rlp-root[data-theme='light'] .nav-rlp { background: rgba(250,249,245,0.78); }
+
+    .nav-link {
+      font-size: 0.87rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      padding: 6px 2px;
+      transition: color 0.25s ease;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-link.active { color: var(--accent); }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -2px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .theme-toggle {
+      width: 38px; height: 38px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      background: transparent;
+      gap: 5px;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-toggle { width: auto; padding: 0 12px; }
+
+    .signal-path {
+      stroke-dasharray: 900;
+      stroke-dashoffset: 900;
+      animation: signalDraw 2.4s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes signalDraw { to { stroke-dashoffset: 0; } }
+
+    .pill {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      display: inline-flex;
+      transition: border-color 0.25s ease, color 0.25s ease;
+      white-space: nowrap;
+    }
+    .pill:hover { border-color: var(--accent); color: var(--accent); }
+
+    .case-card-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+    }
+
+    .result-stat-card {
+      border-top: 3px solid var(--accent);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      border-radius: 4px 4px 16px 16px;
+      padding: 26px 24px;
+      margin-bottom: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .result-stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+    ::selection { background: var(--accent); color: var(--accent-ink); }
+
+    a { color: inherit; text-decoration: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .signal-path { animation: none !important; stroke-dashoffset: 0 !important; }
+      .card-rlp:hover, .btn:hover, .theme-toggle:hover, .result-stat-card:hover { transform: none !important; }
+      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+  `}</style>
+);
+
+/* ============================================================
+   REVEAL WRAPPER
+   ============================================================ */
+
+function Reveal({ children, delay = 0, className = "" }) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            obs.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ============================================================
+   ANIMATED STAT — numbers count up into view for more impact
+   ============================================================ */
+
+function AnimatedStat({ value, style, className }) {
+  const match = /^(\D*)(\d+(?:[.,]\d+)?)(\D*)$/.exec(value);
+  const ref = useRef(null);
+  const startedRef = useRef(false);
+  const [display, setDisplay] = useState(match ? `${match[1]}0${match[3]}` : value);
+
+  useEffect(() => {
+    if (!match) return;
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !startedRef.current) {
+            startedRef.current = true;
+            runAnimation();
+            obs.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
+  function runAnimation() {
+    const [, prefix, numStr, suffix] = match;
+    const target = parseFloat(numStr.replace(",", "."));
+    const decimalPart = numStr.split(/[.,]/)[1];
+    const decimals = decimalPart ? decimalPart.length : 0;
+
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduced) {
+      setDisplay(`${prefix}${numStr}${suffix}`);
+      return;
+    }
+
+    const duration = 1300;
+    const startTime = performance.now();
+
+    function tick(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = target * eased;
+      const formatted = decimals ? current.toFixed(decimals) : Math.round(current).toString();
+      setDisplay(`${prefix}${formatted}${suffix}`);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  return (
+    <span ref={ref} className={className} style={style}>
+      {match ? display : value}
+    </span>
+  );
+}
+
+/* ============================================================
+   SIGNAL LINE — signature motif: noise resolving into clarity
+   ============================================================ */
+
+function SignalLine({ height = 120, muted = false }) {
+  const path =
+    "M0,60 L20,30 L40,85 L60,20 L80,75 L100,35 L120,68 L140,40 L160,58 " +
+    "L200,52 L240,50 L280,49 L340,50 L420,50 L520,50 L640,50 L760,50 L860,50";
+
+  return (
+    <svg
+      viewBox="0 0 860 120"
+      width="100%"
+      height={height}
+      preserveAspectRatio="none"
+      style={{ display: "block", opacity: muted ? 0.35 : 1 }}
+    >
+      <path
+        d={path}
+        fill="none"
+        stroke="var(--accent)"
+        strokeWidth="1.5"
+        className="signal-path"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+
+function Nav({ theme, toggleTheme, lang, toggleLang, view, goHome, activeSection, scrollToId, t }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const navItems = [
+    { id: "about", label: t.nav.about },
+    { id: "philosophy", label: t.nav.philosophy },
+    { id: "work", label: t.nav.work },
+    { id: "how-i-think", label: t.nav.howIThink },
+    { id: "gtm", label: t.nav.gtm },
+    { id: "contact", label: t.nav.contact },
+  ];
+
+  return (
+    <header className="nav-rlp">
+      <div
+        className="container-rlp"
+        style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}
+      >
+        <div
+          className="f-display"
+          style={{ fontSize: "1.05rem", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}
+          onClick={goHome}
+        >
+          <span>Rebecca</span>
+          <span style={{ color: "var(--accent)" }}>Lopes</span>
+        </div>
+
+        {view === "home" && (
+          <nav style={{ display: "none", gap: 30 }} className="nav-desktop">
+            {navItems.map((item) => (
+              <span
+                key={item.id}
+                className={`nav-link ${activeSection === item.id ? "active" : ""}`}
+                onClick={() => scrollToId(item.id)}
+              >
+                {item.label}
+              </span>
+            ))}
+          </nav>
+        )}
+
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {view !== "home" && (
+            <span className="btn btn-ghost" onClick={goHome} style={{ fontSize: "0.85rem" }}>
+              {t.nav.backToWork}
+            </span>
+          )}
+          <button className="theme-toggle lang-toggle" onClick={toggleLang} aria-label="Toggle language">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18M12 3c2.4 2.5 3.6 5.8 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.8-3.6-9s1.2-6.5 3.6-9z" />
+            </svg>
+            <span className="f-mono" style={{ fontSize: "0.68rem" }}>{lang.toUpperCase()}</span>
+          </button>
+          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle color theme">
+            {theme === "dark" ? (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                <circle cx="12" cy="12" r="4.2" />
+                <path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z" />
+              </svg>
+            )}
+          </button>
+          <button
+            className="theme-toggle nav-mobile-toggle"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+              {menuOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && view === "home" && (
+        <div
+          className="nav-mobile-panel"
+          style={{
+            borderTop: "1px solid var(--border)",
+            padding: "18px 24px 26px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
+          {navItems.map((item) => (
+            <span
+              key={item.id}
+              className="nav-link"
+              style={{ fontSize: "1rem" }}
+              onClick={() => {
+                scrollToId(item.id);
+                setMenuOpen(false);
+              }}
+            >
+              {item.label}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <style>{`
+        @media (min-width: 900px) {
+          .nav-desktop { display: flex !important; }
+          .nav-mobile-toggle { display: none !important; }
+        }
+      `}</style>
+    </header>
+  );
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+function Hero({ t, scrollToId }) {
+  return (
+    <section className="section-rlp" style={{ paddingTop: 150, position: "relative" }}>
+      <div style={{ position: "absolute", top: 100, left: 0, right: 0, opacity: 0.9, pointerEvents: "none" }}>
+        <SignalLine height={140} />
+      </div>
+      <div className="container-rlp" style={{ position: "relative", paddingTop: 40 }}>
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 18 }}>
+            {t.hero.eyebrow}
+          </div>
+        </Reveal>
+        <Reveal delay={50}>
+          <span
+            className="pill"
+            style={{ borderColor: "var(--accent)", color: "var(--accent)", marginBottom: 26, display: "inline-flex" }}
+          >
+            {t.hero.badge}
+          </span>
+        </Reveal>
+        <Reveal delay={110}>
+          <h1
+            className="f-display"
+            style={{ fontSize: "clamp(2.4rem, 6vw, 4.6rem)", maxWidth: 880, margin: "22px 0 26px" }}
+          >
+            {t.hero.headlinePre}
+            <em>{t.hero.headlineEm}</em>
+            {t.hero.headlinePost}
+          </h1>
+        </Reveal>
+        <Reveal delay={190}>
+          <p style={{ fontSize: "1.15rem", color: "var(--text-muted)", maxWidth: 580, lineHeight: 1.6, marginBottom: 40 }}>
+            {t.hero.subtitle}
+          </p>
+        </Reveal>
+        <Reveal delay={260}>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <span className="btn btn-primary" onClick={() => scrollToId("work")}>
+              {t.hero.ctaWork}
+            </span>
+            <span className="btn btn-secondary" onClick={() => scrollToId("contact")}>
+              {t.hero.ctaConnect}
+            </span>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   ABOUT + TIMELINE — condensed, per request
+   ============================================================ */
+
+function About({ t }) {
+  return (
+    <section id="about" className="section-rlp">
+      <div className="container-rlp">
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.about.eyebrow}</div>
+        </Reveal>
+        <Reveal delay={60}>
+          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 680, marginBottom: 34 }}>
+            {t.about.heading}
+          </h2>
+        </Reveal>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 48 }} className="about-grid">
+          <Reveal delay={100}>
+            <div style={{ maxWidth: 560, display: "flex", flexDirection: "column", gap: 18 }}>
+              <p style={{ color: "var(--text-muted)", fontSize: "1.08rem", lineHeight: 1.75 }}>{t.about.p1}</p>
+              <p className="f-display" style={{ fontSize: "1.25rem", lineHeight: 1.5, fontWeight: 400 }}>
+                {t.about.p2}
+              </p>
+            </div>
+          </Reveal>
+
+          <div>
+            {t.timeline.map((tl, i) => (
+              <Reveal key={i} delay={i * 60}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "70px 1fr",
+                    gap: 20,
+                    paddingBottom: 22,
+                    paddingTop: i === 0 ? 0 : 22,
+                    borderTop: i === 0 ? "none" : "1px solid var(--border)",
+                  }}
+                >
+                  <div className="f-mono" style={{ color: "var(--text-faint)", paddingTop: 3 }}>
+                    {tl.year}
+                  </div>
+                  <div>
+                    <div className="f-display" style={{ fontSize: "1.1rem", marginBottom: 5 }}>
+                      {tl.title}
+                    </div>
+                    <div style={{ color: "var(--text-muted)", fontSize: "0.92rem", lineHeight: 1.55 }}>
+                      {tl.copy}
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @media (min-width: 1000px) {
+          .about-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/* ============================================================
+   PHILOSOPHY
+   ============================================================ */
+
+function Philosophy({ t }) {
+  return (
+    <section id="philosophy" className="section-rlp">
+      <div className="container-rlp">
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.philosophy.eyebrow}</div>
+        </Reveal>
+        <Reveal delay={60}>
+          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 50 }}>
+            {t.philosophy.headingPre}
+            <em>{t.philosophy.headingEm}</em>
+            {t.philosophy.headingPost}
+          </h2>
+        </Reveal>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 1 }} className="philosophy-grid">
+          {t.philosophy.statements.map((s, i) => (
+            <Reveal key={i} delay={i * 80}>
+              <div className="card-rlp" style={{ padding: "34px 30px", height: "100%" }}>
+                <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 16 }}>
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <p className="f-display" style={{ fontSize: "1.28rem", lineHeight: 1.4, fontWeight: 400 }}>
+                  {s}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={200}>
+          <div style={{ marginTop: 56, textAlign: "center" }}>
+            <div style={{ maxWidth: 640, margin: "0 auto" }}>
+              <SignalLine height={70} />
+            </div>
+            <div className="f-mono" style={{ color: "var(--text-faint)", marginTop: 10 }}>
+              {t.philosophy.signalCaption}
+            </div>
+          </div>
+        </Reveal>
+      </div>
+
+      <style>{`
+        @media (min-width: 700px) {
+          .philosophy-grid { grid-template-columns: 1fr 1fr !important; gap: 18px !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/* ============================================================
+   FEATURED WORK — grid + detail page
+   ============================================================ */
+
+function WorkGrid({ t, cases, openCase }) {
+  return (
+    <section id="work" className="section-rlp">
+      <div className="container-rlp">
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.work.eyebrow}</div>
+        </Reveal>
+        <Reveal delay={60}>
+          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 50 }}>
+            {t.work.heading}
+          </h2>
+        </Reveal>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20 }} className="work-grid">
+          {cases.map((c, i) => (
+            <Reveal key={c.slug} delay={i * 70}>
+              <div
+                className="card-rlp"
+                style={{ padding: "30px 28px", cursor: "pointer", height: "100%", display: "flex", flexDirection: "column" }}
+                onClick={() => openCase(c.slug)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === "Enter") openCase(c.slug); }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 22 }}>
+                  <span className="case-card-num">{c.index}</span>
+                  {c.status === "progress" && (
+                    <span className="pill" style={{ fontSize: "0.68rem", padding: "5px 10px" }}>{t.work.inProgress}</span>
+                  )}
+                </div>
+                <div className="f-display" style={{ fontSize: "1.4rem", marginBottom: 8 }}>{c.company}</div>
+                <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 16, textTransform: "none", letterSpacing: "0.02em" }}>
+                  {c.role}
+                </div>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", lineHeight: 1.6, flexGrow: 1, marginBottom: 22 }}>
+                  {c.hook}
+                </p>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", borderTop: "1px solid var(--border)", paddingTop: 18 }}>
+                  <div>
+                    <div className="f-display" style={{ fontSize: "1.3rem", color: "var(--accent)" }}>
+                      <AnimatedStat value={c.heroStat.value} />
+                    </div>
+                    <div style={{ fontSize: "0.78rem", color: "var(--text-faint)" }}>{c.heroStat.label}</div>
+                  </div>
+                  <span className="f-mono" style={{ color: "var(--text-muted)" }}>{t.work.readCase}</span>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @media (min-width: 720px) {
+          .work-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (min-width: 1080px) {
+          .work-grid { grid-template-columns: 1fr 1fr 1fr !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+function CaseDetail({ caseData, t, goHome }) {
+  const c = caseData;
+  useEffect(() => { window.scrollTo(0, 0); }, [c.slug]);
+
+  return (
+    <div style={{ paddingTop: 130, paddingBottom: 100 }}>
+      <div className="container-rlp">
+        <Reveal>
+          <span className="btn btn-ghost" onClick={goHome} style={{ marginBottom: 30, display: "inline-flex" }}>
+            {t.nav.backToWork}
+          </span>
+        </Reveal>
+
+        <Reveal delay={40}>
+          <div className="eyebrow" style={{ marginBottom: 18 }}>{t.caseLabels.caseStudy} · {c.index}</div>
+        </Reveal>
+        <Reveal delay={80}>
+          <h1 className="f-display" style={{ fontSize: "clamp(2rem, 5vw, 3.4rem)", marginBottom: 16, maxWidth: 780 }}>
+            {c.company}
+          </h1>
+        </Reveal>
+        <Reveal delay={120}>
+          <p style={{ color: "var(--text-muted)", fontSize: "1.08rem", maxWidth: 640, lineHeight: 1.65, marginBottom: 40 }}>
+            {c.hook}
+          </p>
+        </Reveal>
+
+        <Reveal delay={160}>
+          <div
+            className="card-rlp"
+            style={{ padding: "36px 32px", marginBottom: 64, display: "flex", alignItems: "baseline", gap: 20, flexWrap: "wrap" }}
+          >
+            <div className="f-display" style={{ fontSize: "clamp(2.2rem, 5vw, 3.2rem)", color: "var(--accent)" }}>
+              <AnimatedStat value={c.heroStat.value} />
+            </div>
+            <div className="f-mono" style={{ color: "var(--text-muted)", textTransform: "none", letterSpacing: "0.02em" }}>
+              {c.heroStat.label}
+            </div>
+          </div>
+        </Reveal>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 56 }} className="case-detail-grid">
+          <div>
+            <Reveal>
+              <div style={{ marginBottom: 44 }}>
+                <div className="f-mono" style={{ color: "var(--accent)", marginBottom: 14 }}>{t.caseLabels.challenge}</div>
+                <p style={{ fontSize: "1.05rem", lineHeight: 1.7, color: "var(--text)" }}>{c.challenge}</p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={60}>
+              <div style={{ marginBottom: 44 }}>
+                <div className="f-mono" style={{ color: "var(--accent)", marginBottom: 14 }}>{t.caseLabels.hypothesis}</div>
+                <p className="f-display" style={{ fontSize: "1.3rem", lineHeight: 1.45, fontWeight: 400 }}>
+                  {c.hypothesis}
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div style={{ marginBottom: 44 }}>
+                <div className="f-mono" style={{ color: "var(--accent)", marginBottom: 18 }}>{t.caseLabels.execution}</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  {c.execution.map((step, i) => (
+                    <div key={i} style={{ display: "grid", gridTemplateColumns: "34px 1fr", gap: 14 }}>
+                      <div className="f-mono" style={{ color: "var(--text-faint)" }}>{String(i + 1).padStart(2, "0")}</div>
+                      <p style={{ color: "var(--text-muted)", fontSize: "0.98rem", lineHeight: 1.65 }}>{step}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+
+            {c.roadmap && (
+              <Reveal delay={120}>
+                <div style={{ marginBottom: 44 }}>
+                  <div className="f-mono" style={{ color: "var(--accent)", marginBottom: 18 }}>{t.caseLabels.roadmap}</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    {c.roadmap.map((r, i) => (
+                      <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                        <span style={{ color: "var(--accent)", marginTop: 2 }}>→</span>
+                        <p style={{ color: "var(--text-muted)", fontSize: "0.98rem", lineHeight: 1.6 }}>{r}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            )}
+
+            {c.future && (
+              <Reveal delay={140}>
+                <div style={{ marginBottom: 44 }}>
+                  <div className="f-mono" style={{ color: "var(--accent)", marginBottom: 14 }}>{t.caseLabels.future}</div>
+                  <p style={{ fontSize: "1.02rem", lineHeight: 1.7, color: "var(--text-muted)" }}>{c.future}</p>
+                </div>
+              </Reveal>
+            )}
+
+            <Reveal delay={160}>
+              <div style={{ borderLeft: "2px solid var(--accent)", paddingLeft: 22, marginTop: 50 }}>
+                <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 10 }}>{t.caseLabels.lessons}</div>
+                <p className="f-display" style={{ fontSize: "1.2rem", lineHeight: 1.5, fontWeight: 400 }}>
+                  {c.lessons}
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          <div>
+            <Reveal delay={80}>
+              <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 18 }}>{t.caseLabels.results}</div>
+              <div>
+                {c.results.map((r, i) => (
+                  <div key={i} className="result-stat-card">
+                    <div className="f-display" style={{ fontSize: "2.1rem", color: "var(--accent)", marginBottom: 6 }}>
+                      <AnimatedStat value={r.value} />
+                    </div>
+                    <div style={{ fontSize: "0.87rem", color: "var(--text-muted)" }}>{r.label}</div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @media (min-width: 900px) {
+          .case-detail-grid { grid-template-columns: 1.6fr 1fr !important; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/* ============================================================
+   HOW I THINK — the signal-line framework
+   ============================================================ */
+
+function HowIThink({ t }) {
+  return (
+    <section id="how-i-think" className="section-rlp">
+      <div className="container-rlp">
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.howIThink.eyebrow}</div>
+        </Reveal>
+        <Reveal delay={60}>
+          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 20 }}>
+            {t.howIThink.heading}
+          </h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p style={{ color: "var(--text-muted)", maxWidth: 560, marginBottom: 56, lineHeight: 1.65 }}>
+            {t.howIThink.subtitle}
+          </p>
+        </Reveal>
+
+        <Reveal delay={140}>
+          <div className="think-flow">
+            {t.howIThink.steps.map((step, i) => (
+              <React.Fragment key={step}>
+                <div className="think-node">
+                  <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 8 }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className="f-display" style={{ fontSize: "1.05rem" }}>{step}</div>
+                </div>
+                {i < t.howIThink.steps.length - 1 && <div className="think-connector" />}
+              </React.Fragment>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+
+      <style>{`
+        .think-flow { display: grid; grid-template-columns: 1fr; gap: 0; }
+        .think-node { padding: 18px 0; border-top: 1px solid var(--border); }
+        .think-connector { display: none; }
+        @media (min-width: 900px) {
+          .think-flow { display: flex; align-items: stretch; overflow-x: auto; padding-bottom: 10px; }
+          .think-node { border-top: none; border-left: 2px solid var(--accent); padding: 4px 0 4px 16px; min-width: 132px; flex-shrink: 0; }
+          .think-connector { display: block; width: 24px; border-top: 1px dashed var(--border-strong); align-self: center; flex-shrink: 0; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/* ============================================================
+   GTM FRAMEWORK
+   ============================================================ */
+
+function GTM({ t }) {
+  return (
+    <section id="gtm" className="section-rlp">
+      <div className="container-rlp">
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.gtm.eyebrow}</div>
+        </Reveal>
+        <Reveal delay={60}>
+          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 50 }}>
+            {t.gtm.heading}
+          </h2>
+        </Reveal>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 1 }} className="gtm-grid">
+          {t.gtm.items.map((g, i) => (
+            <Reveal key={g.title} delay={(i % 5) * 50}>
+              <div className="card-rlp" style={{ padding: "26px 24px", height: "100%" }}>
+                <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 12 }}>
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <div className="f-display" style={{ fontSize: "1.08rem", marginBottom: 10 }}>{g.title}</div>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.55 }}>{g.copy}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @media (min-width: 640px) {
+          .gtm-grid { grid-template-columns: 1fr 1fr !important; gap: 14px !important; }
+        }
+        @media (min-width: 1000px) {
+          .gtm-grid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/* ============================================================
+   AI & DEVELOPMENT INFRASTRUCTURE
+   ============================================================ */
+
+function AIInfra({ t }) {
+  return (
+    <section id="ai-infra" className="section-rlp">
+      <div className="container-rlp">
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.aiInfra.eyebrow}</div>
+        </Reveal>
+        <Reveal delay={60}>
+          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 50 }}>
+            {t.aiInfra.heading}
+          </h2>
+        </Reveal>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 34 }}>
+          {t.aiInfra.groups.map((group, i) => (
+            <Reveal key={group.label} delay={i * 70}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr",
+                  gap: 16,
+                  paddingBottom: 26,
+                  borderBottom: i < t.aiInfra.groups.length - 1 ? "1px solid var(--border)" : "none",
+                }}
+                className="ai-group-row"
+              >
+                <div className="f-mono" style={{ color: "var(--text-faint)" }}>{group.label}</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                  {group.items.map((item) => (
+                    <span className="pill" key={item}>{item}</span>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @media (min-width: 720px) {
+          .ai-group-row { grid-template-columns: 200px 1fr !important; align-items: center; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/* ============================================================
+   TOOLBOX
+   ============================================================ */
+
+function Toolbox({ t }) {
+  return (
+    <section id="toolbox" className="section-rlp">
+      <div className="container-rlp">
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.toolbox.eyebrow}</div>
+        </Reveal>
+        <Reveal delay={60}>
+          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 50 }}>
+            {t.toolbox.heading}
+          </h2>
+        </Reveal>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }} className="toolbox-grid">
+          {t.toolbox.groups.map((g, i) => (
+            <Reveal key={g.label} delay={i * 60}>
+              <div className="card-rlp" style={{ padding: "28px 26px", height: "100%" }}>
+                <div className="f-display" style={{ fontSize: "1.1rem", marginBottom: 16 }}>{g.label}</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {g.items.map((item) => (
+                    <span key={item} className="pill" style={{ fontSize: "0.74rem" }}>{item}</span>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @media (min-width: 720px) {
+          .toolbox-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (min-width: 1080px) {
+          .toolbox-grid { grid-template-columns: 1fr 1fr 1fr !important; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/* ============================================================
+   CONTACT — update the placeholders below with real links
+   ============================================================ */
+
+const CONTACT_INFO = {
+  name: "Rebecca Lopes Alves da Silva",
+  location: "São Paulo, Brazil",
+  linkedin: "https://linkedin.com/in/rebecca-lopes-placeholder",
+  email: "hello@rebeccalopes.com",
+};
+
+function Contact({ t }) {
+  return (
+    <section id="contact" className="section-rlp" style={{ paddingBottom: 90 }}>
+      <div className="container-rlp">
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 24 }}>{t.contact.eyebrow}</div>
+        </Reveal>
+        <Reveal delay={60}>
+          <h2 className="f-display" style={{ fontSize: "clamp(2.1rem, 5.5vw, 3.6rem)", maxWidth: 760, marginBottom: 40 }}>
+            {t.contact.headingPre}
+            <em>{t.contact.headingEm}</em>
+            {t.contact.headingPost}
+          </h2>
+        </Reveal>
+
+        <Reveal delay={120}>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 60 }}>
+            <a className="btn btn-primary" href={`mailto:${CONTACT_INFO.email}`}>
+              {t.contact.emailBtn}
+            </a>
+            <a className="btn btn-secondary" href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer">
+              {t.contact.linkedinBtn}
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal delay={160}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: 20,
+              paddingTop: 30,
+              borderTop: "1px solid var(--border)",
+            }}
+          >
+            <div>
+              <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 6 }}>{t.contact.nameLabel}</div>
+              <div style={{ fontSize: "1rem" }}>{CONTACT_INFO.name}</div>
+            </div>
+            <div>
+              <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 6 }}>{t.contact.basedLabel}</div>
+              <div style={{ fontSize: "1rem" }}>{CONTACT_INFO.location}</div>
+            </div>
+            <div>
+              <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 6 }}>{t.contact.emailLabel}</div>
+              <div style={{ fontSize: "1rem" }}>{CONTACT_INFO.email}</div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function Footer({ t }) {
+  return (
+    <footer className="container-rlp" style={{ paddingTop: 20, paddingBottom: 40 }}>
+      <div
+        style={{
+          borderTop: "1px solid var(--border)",
+          paddingTop: 24,
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: 10,
+          fontSize: "0.82rem",
+          color: "var(--text-faint)",
+        }}
+      >
+        <span>© {new Date().getFullYear()} Rebecca Lopes Alves da Silva</span>
+        <span className="f-mono">{t.footer.tagline}</span>
+      </div>
+    </footer>
+  );
+}
+
+
+/* ============================================================
+   APP — theme state, language state, client-side view routing
+   ============================================================ */
+
+const SECTION_IDS = ["about", "philosophy", "work", "how-i-think", "gtm", "contact"];
+
+function App() {
+  const [theme, setTheme] = useState("dark");
+  const [lang, setLang] = useState("en");
+  const [view, setView] = useState("home"); // 'home' | case slug
+  const [activeSection, setActiveSection] = useState("about");
+
+  const t = CONTENT[lang];
+  const cases = CASES[lang];
+
+  const toggleTheme = useCallback(() => {
+    setTheme((cur) => (cur === "dark" ? "light" : "dark"));
+  }, []);
+
+  const toggleLang = useCallback(() => {
+    setLang((cur) => (cur === "en" ? "pt" : "en"));
+  }, []);
+
+  const scrollToId = useCallback((id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 76;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, []);
+
+  const goHome = useCallback(() => {
+    setView("home");
+    window.scrollTo(0, 0);
+  }, []);
+
+  const openCase = useCallback((slug) => {
+    setView(slug);
+  }, []);
+
+  useEffect(() => {
+    if (view !== "home") return;
+    const els = SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean);
+    if (els.length === 0) return;
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, [view, lang]);
+
+  const activeCase = view !== "home" ? cases.find((c) => c.slug === view) : null;
+
+  return (
+    <div className="rlp-root" data-theme={theme}>
+      <GlobalStyles />
+      <Nav
+        theme={theme}
+        toggleTheme={toggleTheme}
+        lang={lang}
+        toggleLang={toggleLang}
+        view={view}
+        goHome={goHome}
+        activeSection={activeSection}
+        scrollToId={scrollToId}
+        t={t}
+      />
+
+      {view === "home" ? (
+        <main>
+          <Hero t={t} scrollToId={scrollToId} />
+          <About t={t} />
+          <Philosophy t={t} />
+          <WorkGrid t={t} cases={cases} openCase={openCase} />
+          <HowIThink t={t} />
+          <GTM t={t} />
+          <AIInfra t={t} />
+          <Toolbox t={t} />
+          <Contact t={t} />
+        </main>
+      ) : (
+        <main>
+          {activeCase ? <CaseDetail caseData={activeCase} t={t} goHome={goHome} /> : null}
+        </main>
+      )}
+
+      <Footer t={t} />
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>
