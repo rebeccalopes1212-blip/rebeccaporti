@@ -615,22 +615,23 @@ const GlobalStyles = () => (
     .btn {
       font-family: 'Inter', sans-serif;
       font-weight: 500;
-      font-size: 0.95rem;
-      padding: 13px 26px;
+      font-size: 1.05rem;
+      padding: 16px 32px;
       border-radius: 999px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
       border: 1px solid transparent;
       white-space: nowrap;
     }
-    .btn:active { transform: translateY(1px); }
+    .btn:hover { transform: scale(1.03); }
+    .btn:active { transform: scale(0.99); }
     .btn-primary { background: var(--accent); color: var(--accent-ink); }
-    .btn-primary:hover { background: var(--accent-strong); box-shadow: 0 10px 30px var(--accent-glow); transform: translateY(-1px); }
+    .btn-primary:hover { background: var(--accent-strong); box-shadow: 0 18px 46px var(--accent-glow); transform: scale(1.03); }
     .btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.03); }
     .btn-ghost { background: transparent; color: var(--text-muted); padding: 8px 4px; }
     .btn-ghost:hover { color: var(--accent); }
 
@@ -649,9 +650,10 @@ const GlobalStyles = () => (
     .reveal {
       opacity: 0;
       transform: translateY(26px);
-      transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+      filter: blur(8px);
+      transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1), filter 1s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); filter: blur(0px); }
 
     .hr-rlp { height: 1px; background: var(--border); border: none; width: 100%; }
 
@@ -741,7 +743,7 @@ const GlobalStyles = () => (
     a { color: inherit; text-decoration: none; }
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
       .signal-path { animation: none !important; stroke-dashoffset: 0 !important; }
       .card-rlp:hover, .btn:hover, .theme-toggle:hover, .result-stat-card:hover { transform: none !important; }
       * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
@@ -828,6 +830,10 @@ const GlobalStyles = () => (
       display: flex;
       align-items: center;
       isolation: isolate;
+      padding-top: 110px;
+    }
+    @media (min-width: 768px) {
+      .hero-rlp { padding-top: 160px; }
     }
     .spline-bg {
       position: absolute;
@@ -1138,41 +1144,28 @@ function Hero({ t, scrollToId }) {
   return (
     <section
       className="section-rlp hero-rlp"
-      style={{ paddingTop: 150, position: "relative", overflow: "hidden" }}
+      style={{ position: "relative", overflow: "hidden" }}
     >
       <SplineBackground />
       <div className="hero-fade" aria-hidden="true" />
 
-      <div className="container-rlp" style={{ position: "relative", zIndex: 2, paddingTop: 40 }}>
+      <div className="container-rlp" style={{ position: "relative", zIndex: 2 }}>
         <Reveal>
-          <div className="eyebrow" style={{ marginBottom: 18 }}>
-            {t.hero.eyebrow}
-          </div>
-        </Reveal>
-        <Reveal delay={50}>
-          <span
-            className="pill"
-            style={{ borderColor: "var(--accent)", color: "var(--accent)", marginBottom: 26, display: "inline-flex" }}
-          >
-            {t.hero.badge}
-          </span>
-        </Reveal>
-        <Reveal delay={110}>
           <h1
             className="f-display"
-            style={{ fontSize: "clamp(2.4rem, 6vw, 4.6rem)", maxWidth: 880, margin: "22px 0 26px" }}
+            style={{ fontSize: "clamp(2.4rem, 6vw, 4.6rem)", maxWidth: 880, margin: "0 0 26px" }}
           >
             {t.hero.headlinePre}
             <em>{t.hero.headlineEm}</em>
             {t.hero.headlinePost}
           </h1>
         </Reveal>
-        <Reveal delay={190}>
+        <Reveal delay={80}>
           <p style={{ fontSize: "1.15rem", color: "var(--text-muted)", maxWidth: 580, lineHeight: 1.6, marginBottom: 40 }}>
             {t.hero.subtitle}
           </p>
         </Reveal>
-        <Reveal delay={260}>
+        <Reveal delay={150}>
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
             <span className="btn btn-primary" onClick={() => scrollToId("work")}>
               {t.hero.ctaWork}
