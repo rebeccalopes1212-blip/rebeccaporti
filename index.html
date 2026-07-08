@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rebecca Lopes | GTM & Product Growth</title>
+<title>Rebecca Lopes | Product Marketing, Growth & AI</title>
 <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js" crossorigin></script>
 <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.24.7/babel.min.js" crossorigin></script>
@@ -27,51 +27,40 @@ const CONTENT = {
       philosophy: "Philosophy",
       work: "Work",
       howIThink: "How I Think",
-      gtm: "GTM",
       contact: "Contact",
       backToWork: "← Back to work",
     },
     hero: {
-      eyebrow: "Rebecca Lopes | GTM & Product Growth",
-      badge: "⚡ Built for ecosystem scale",
-      headlinePre: "Turning user behavior into ",
-      headlineEm: "revenue engines",
+      eyebrow: "Rebecca Lopes",
+      headlinePre: "I turn ideas into products people ",
+      headlineEm: "actually adopt",
       headlinePost: ".",
       subtitle:
-        "I build systems that generate adoption: from end-to-end e-commerce operations to partner ecosystems and live commerce conversions.",
-      ctaWork: "See the impact",
-      ctaConnect: "Start a project",
+        "Product Marketing, Growth and AI. From strategy to execution, I build products that people understand, adopt and recommend.",
+      ctaWork: "See the work",
+      ctaConnect: "Get in touch",
     },
     about: {
-      eyebrow: "The operating thesis",
-      heading: "I build systems that generate adoption.",
-      p1: "Finance, analytics, product operations. I learned to read a business before scaling it. Today that instinct becomes conversion infrastructure: the systems, positioning, and partner operations that move numbers, not narratives.",
-      p2: "Whether managing end-to-end e-commerce operations, deploying partner apps to increase NPS, or engineering live commerce conversions, I build for ecosystem scale and supply chain visibility.",
+      eyebrow: "About",
+      intro: "I believe growth starts long before acquisition. The best marketing isn't louder campaigns. It's better products, clearer positioning and fewer reasons for customers to hesitate. That's what I build.",
     },
-    timeline: [
-      { year: "Start", title: "Finance", copy: "Learned to read a business before trying to grow one." },
-      { year: "Next", title: "Analytics", copy: "Stopped asking what happened, started asking why." },
-      { year: "Then", title: "Product Operations", copy: "Close enough to the product to see where it broke." },
-      { year: "Then", title: "Senior Performance Analyst", copy: "Media, data, and product decisions in one conversation." },
-      { year: "Then", title: "Product Marketing & Growth Lead", copy: "Built the marketing function from scratch." },
-      { year: "Now", title: "Independent Builder", copy: "Building AI products and e-commerce from nothing." },
-    ],
+    timeline: ["Finance", "Analytics", "Product Operations", "Growth", "Product Marketing", "Building AI products"],
     philosophy: {
       eyebrow: "How I see the work",
       headingPre: "Product marketing isn't a launch. It's ",
       headingEm: "clarity",
       headingPost: ", delivered on time.",
       statements: [
-        "People don't buy features. They buy confidence that this is the right decision.",
-        "Positioning isn't a tagline. It's the shortest path between what you built and what someone already believes.",
-        "Every product deserves a story customers understand before they finish reading it.",
-        "Great GTM doesn't create demand. It removes the friction between demand and belief.",
+        "People buy confidence.",
+        "Positioning creates clarity.",
+        "Great GTM removes friction.",
+        "Growth compounds trust.",
       ],
       signalCaption: "Noise becomes signal",
     },
     work: {
-      eyebrow: "Featured work",
-      heading: "Five products. Five different starting points. The same instinct.",
+      eyebrow: "Selected work",
+      heading: "A few things I've built.",
       readCase: "Read case →",
       inProgress: "In progress",
     },
@@ -85,42 +74,15 @@ const CONTENT = {
         "Messaging", "Experimentation", "Measurement", "Iteration", "Growth",
       ],
     },
-    gtm: {
-      eyebrow: "My GTM framework",
-      heading: "Ten decisions, made in order, before a single ad runs.",
-      items: [
-        { title: "Market Research", copy: "Understand the category before claiming a place in it." },
-        { title: "Competitive Analysis", copy: "Know what's already believed, so you're not repeating it." },
-        { title: "ICP", copy: "Define who this is actually for, and who it deliberately isn't." },
-        { title: "Positioning", copy: "The one true thing that makes the rest of the story make sense." },
-        { title: "Messaging", copy: "Positioning, translated into words a customer would actually say." },
-        { title: "Launch", copy: "The moment belief and access arrive for the customer at the same time." },
-        { title: "Sales Enablement", copy: "Give the story to the people repeating it on your behalf." },
-        { title: "Lifecycle", copy: "What keeps a customer convinced after the first purchase." },
-        { title: "Growth", copy: "Compounding the moments that already convert, deliberately." },
-        { title: "KPIs", copy: "The few numbers that would actually change a decision." },
-      ],
-    },
     aiInfra: {
-      eyebrow: "AI & development infrastructure",
+      eyebrow: "AI Stack",
       heading: "I don't just prompt AI. I ship with it.",
       groups: [
-        { label: "Models", items: ["ChatGPT", "Claude", "Gemini", "Meta AI"] },
-        { label: "Build & Ship", items: ["Lovable", "Cursor", "Vercel", "GitHub", "Supabase"] },
-        { label: "Automation", items: ["Make", "Zapier"] },
-        { label: "Craft", items: ["Prompt Engineering", "Custom GPTs", "Fireflies Transcription"] },
+        { label: "Models", items: ["ChatGPT", "Claude", "Gemini"] },
+        { label: "Build & Ship", items: ["Cursor", "Lovable", "Vercel", "Supabase"] },
+        { label: "Automate", items: ["Make", "Zapier"] },
       ],
-    },
-    toolbox: {
-      eyebrow: "Toolbox",
-      heading: "The stack behind the work.",
-      groups: [
-        { label: "Product Marketing & Growth", items: ["Positioning", "GTM Strategy", "Lifecycle Marketing", "Storytelling"] },
-        { label: "Paid Media", items: ["Meta Ads", "Google Ads", "TikTok for Business"] },
-        { label: "Data & Analytics", items: ["SQL", "GA4", "Looker", "HubSpot"] },
-        { label: "Design & Content", items: ["Figma", "CapCut"] },
-        { label: "Systems", items: ["Notion", "AI Tooling", "Automation"] },
-      ],
+      note: "Everything on this website was built using AI-assisted workflows.",
     },
     contact: {
       eyebrow: "Get in touch",
@@ -155,51 +117,40 @@ const CONTENT = {
       philosophy: "Filosofia",
       work: "Projetos",
       howIThink: "Como Penso",
-      gtm: "GTM",
       contact: "Contato",
       backToWork: "← Voltar aos projetos",
     },
     hero: {
-      eyebrow: "Rebecca Lopes | GTM & Product Growth",
-      badge: "⚡ Feito para escala de ecossistema",
-      headlinePre: "Transformando comportamento em ",
-      headlineEm: "motores de receita",
+      eyebrow: "Rebecca Lopes",
+      headlinePre: "Transformo ideias em produtos que as pessoas ",
+      headlineEm: "realmente adotam",
       headlinePost: ".",
       subtitle:
-        "Construo sistemas focados em adoção: da operação de e-commerces à escala de parceiros e infraestrutura de conversão.",
-      ctaWork: "Ver o impacto",
-      ctaConnect: "Iniciar um projeto",
+        "Marketing de Produto, Growth e IA. Da estratégia à execução, construo produtos que as pessoas entendem, adotam e recomendam.",
+      ctaWork: "Ver os projetos",
+      ctaConnect: "Falar comigo",
     },
     about: {
-      eyebrow: "A tese de operação",
-      heading: "Eu construo sistemas que geram adoção.",
-      p1: "Finanças, analytics, operações de produto. Aprendi a ler um negócio antes de escalá-lo. Hoje esse instinto vira infraestrutura de conversão: os sistemas, o posicionamento e as operações de parceiros que movem números, não narrativas.",
-      p2: "Seja gerindo operações de e-commerce de ponta a ponta, implantando apps de parceiros para aumentar o NPS ou engenhando conversões em live commerce, eu construo para escala de ecossistema e visibilidade da cadeia de suprimentos.",
+      eyebrow: "Sobre",
+      intro: "Acredito que o growth começa muito antes da aquisição. O melhor marketing não é uma campanha mais barulhenta. São produtos melhores, posicionamento mais claro e menos motivos para o cliente hesitar. É isso que eu construo.",
     },
-    timeline: [
-      { year: "Início", title: "Finanças", copy: "Aprendi a ler um negócio antes de tentar fazê-lo crescer." },
-      { year: "Depois", title: "Analytics", copy: "Parei de perguntar o que aconteceu e comecei a perguntar por quê." },
-      { year: "Depois", title: "Operações de Produto", copy: "Perto o suficiente do produto pra ver onde ele quebrava." },
-      { year: "Depois", title: "Analista de Performance Sênior", copy: "Mídia, dados e decisões de produto na mesma conversa." },
-      { year: "Depois", title: "Head de Marketing & Growth", copy: "Construí a operação de marketing do zero." },
-      { year: "Hoje", title: "Builder Independente", copy: "Construindo produtos de IA e e-commerce do zero." },
-    ],
+    timeline: ["Finanças", "Analytics", "Operações de Produto", "Growth", "Marketing de Produto", "Construindo produtos com IA"],
     philosophy: {
       eyebrow: "Como vejo o trabalho",
       headingPre: "Marketing de produto não é lançamento. É ",
       headingEm: "clareza",
       headingPost: ", entregue no tempo certo.",
       statements: [
-        "As pessoas não compram funcionalidades. Compram a confiança de que essa é a decisão certa.",
-        "Posicionamento não é slogan. É o caminho mais curto entre o que você construiu e o que a pessoa já acredita.",
-        "Todo produto merece uma história que o cliente entende antes de terminar de ler.",
-        "GTM de verdade não cria demanda. Ele remove o atrito entre a demanda e a crença.",
+        "As pessoas compram confiança.",
+        "Posicionamento cria clareza.",
+        "Um bom GTM remove atritos.",
+        "Growth consolida a confiança.",
       ],
       signalCaption: "Ruído se transforma em sinal",
     },
     work: {
-      eyebrow: "Projetos em destaque",
-      heading: "Cinco produtos. Cinco pontos de partida diferentes. O mesmo instinto.",
+      eyebrow: "Projetos selecionados",
+      heading: "Algumas coisas que construí.",
       readCase: "Ver estudo de caso →",
       inProgress: "Em andamento",
     },
@@ -213,42 +164,15 @@ const CONTENT = {
         "Mensagem", "Experimentação", "Medição", "Iteração", "Growth",
       ],
     },
-    gtm: {
-      eyebrow: "Meu framework de GTM",
-      heading: "Dez decisões, tomadas em ordem, antes de rodar um único anúncio.",
-      items: [
-        { title: "Pesquisa de Mercado", copy: "Entender a categoria antes de reivindicar um lugar nela." },
-        { title: "Análise Competitiva", copy: "Saber no que já se acredita, pra não repetir." },
-        { title: "ICP", copy: "Definir pra quem isso é de verdade, e pra quem definitivamente não é." },
-        { title: "Posicionamento", copy: "A única verdade que faz o resto da história fazer sentido." },
-        { title: "Mensagem", copy: "Posicionamento traduzido pra palavras que o cliente realmente diria." },
-        { title: "Lançamento", copy: "O momento em que crença e acesso chegam juntos pro cliente." },
-        { title: "Capacitação de Vendas", copy: "Dar a história pra quem vai repeti-la em seu nome." },
-        { title: "Lifecycle", copy: "O que mantém o cliente convencido depois da primeira compra." },
-        { title: "Growth", copy: "Potencializar os momentos que já convertem, de propósito." },
-        { title: "KPIs", copy: "Os poucos números que realmente mudariam uma decisão." },
-      ],
-    },
     aiInfra: {
-      eyebrow: "Infraestrutura de IA & desenvolvimento",
+      eyebrow: "AI Stack",
       heading: "Eu não só uso IA. Eu lanço produto com ela.",
       groups: [
-        { label: "Modelos", items: ["ChatGPT", "Claude", "Gemini", "Meta AI"] },
-        { label: "Construção & Deploy", items: ["Lovable", "Cursor", "Vercel", "GitHub", "Supabase"] },
+        { label: "Modelos", items: ["ChatGPT", "Claude", "Gemini"] },
+        { label: "Construção & Deploy", items: ["Cursor", "Lovable", "Vercel", "Supabase"] },
         { label: "Automação", items: ["Make", "Zapier"] },
-        { label: "Ofício", items: ["Prompt Engineering", "GPTs Personalizados", "Transcrição com Fireflies"] },
       ],
-    },
-    toolbox: {
-      eyebrow: "Caixa de ferramentas",
-      heading: "O stack por trás do trabalho.",
-      groups: [
-        { label: "Marketing de Produto & Growth", items: ["Posicionamento", "Estratégia de GTM", "Lifecycle Marketing", "Storytelling"] },
-        { label: "Mídia Paga", items: ["Meta Ads", "Google Ads", "TikTok for Business"] },
-        { label: "Dados & Analytics", items: ["SQL", "GA4", "Looker", "HubSpot"] },
-        { label: "Design & Conteúdo", items: ["Figma", "CapCut"] },
-        { label: "Sistemas", items: ["Notion", "Ferramentas de IA", "Automação"] },
-      ],
+      note: "Tudo neste site foi construído usando fluxos de trabalho assistidos por IA.",
     },
     contact: {
       eyebrow: "Entre em contato",
@@ -287,7 +211,7 @@ const CASES = {
     {
       slug: "refuturiza", index: "01", company: "Refuturiza",
       role: "Product Marketing & Growth Lead",
-      hook: "Technical education wasn't built to hold Gen Z's attention. So we stopped marketing it and started producing it.",
+      hook: "Built the Product Marketing function from scratch. Generated R$100K+ MRR by combining education, entertainment and AI.",
       heroStat: { value: "R$100K+", label: "monthly revenue, from zero" },
       challenge: "Refuturiza teaches Air Conditioning, Electrical, Aesthetics, and Security Camera trades: real, employable skills. But the marketing sounded like a syllabus. Gen Z scrolled past all of it.",
       hypothesis: "Stop marketing the education. Produce the entertainment people already choose to watch, and let the transformation sell the course.",
@@ -316,7 +240,7 @@ const CASES = {
     {
       slug: "gift", index: "02", company: "GIFT · English",
       role: "Founder & Product Builder",
-      hook: "English platforms teach in isolation. Nobody stays motivated alone, so belonging became the product.",
+      hook: "Founded an AI-powered English platform. Concept to a 60-lesson MVP in three months.",
       heroStat: { value: "60", label: "lessons shipped in the MVP" },
       challenge: "Most English platforms are self-paced to the point of being solitary. Motivation fades when no one is watching, and feedback arrives too late, or never.",
       hypothesis: "If learning felt like belonging to something (a challenge, a cohort, a streak worth protecting), retention would follow naturally.",
@@ -345,7 +269,7 @@ const CASES = {
     {
       slug: "angel-joias", index: "03", company: "Angel Joias",
       role: "Founder, Ops & Growth",
-      hook: "A jewelry brand built from zero: domain to delivery, live to loyal customer.",
+      hook: "Built a jewelry brand from zero. 60% conversion through live commerce.",
       heroStat: { value: "60%", label: "conversion rate on live sessions" },
       challenge: "Launching a 925 silver and Swarovski accessories brand with no existing audience, no budget cushion, and no infrastructure to fall back on.",
       hypothesis: "Live commerce could compress discovery and decision into a single moment, if the story and product were both right in real time.",
@@ -365,7 +289,7 @@ const CASES = {
     {
       slug: "quintoandar", index: "04", company: "QuintoAndar",
       role: "QA & Performance, Product Operations",
-      hook: "A fast-scaling partner network needed one clear channel instead of five disconnected ones.",
+      hook: "Shipped a partner app that lifted NPS +5pp in its first month.",
       heroStat: { value: "+5pp", label: "NPS in the first month" },
       challenge: "Partners lacked a dedicated channel for workflow and communication, creating friction across a rapidly scaling operation and inconsistent visibility into what was actually working.",
       hypothesis: "A purpose-built partner app would reduce friction more effectively than another round of process fixes layered onto disconnected tools.",
@@ -387,7 +311,7 @@ const CASES = {
     {
       slug: "refuturiza", index: "01", company: "Refuturiza",
       role: "Head de Marketing de Produto & Growth",
-      hook: "A educação técnica não estava feita pra prender a atenção da Geração Z. Então paramos de anunciar o curso e começamos a produzir conteúdo que eles escolhiam assistir.",
+      hook: "Construí a função de Marketing de Produto do zero. Gerei R$100K+ de MRR combinando educação, entretenimento e IA.",
       heroStat: { value: "R$100K+", label: "faturamento mensal, saindo do zero" },
       challenge: "A Refuturiza ensina Ar Condicionado, Elétrica, Estética e Câmeras de Segurança: profissões reais e empregáveis. Mas o marketing falava como grade curricular. A Geração Z passava direto.",
       hypothesis: "Parar de anunciar o curso. Produzir o entretenimento que as pessoas já escolhem assistir, e deixar a transformação vender o curso.",
@@ -416,7 +340,7 @@ const CASES = {
     {
       slug: "gift", index: "02", company: "GIFT · English",
       role: "Fundadora & Product Builder",
-      hook: "Plataformas de inglês ensinam isoladamente. Sozinha, ninguém se mantém motivado. Então pertencimento se tornou o produto.",
+      hook: "Fundei uma plataforma de inglês com IA. Do conceito a um MVP de 60 aulas em três meses.",
       heroStat: { value: "60", label: "aulas lançadas no MVP" },
       challenge: "A maioria das plataformas de inglês é tão autodirigida que fica solitária. A motivação cai quando ninguém está olhando, e o feedback chega tarde demais, ou nunca.",
       hypothesis: "Se aprender parecesse pertencer a algo (um desafio, uma turma, uma sequência que vale a pena proteger), a retenção viria naturalmente.",
@@ -445,7 +369,7 @@ const CASES = {
     {
       slug: "angel-joias", index: "03", company: "Angel Joias",
       role: "Fundadora, Operações & Growth",
-      hook: "Uma marca de joias construída do zero: do domínio à entrega, da live à cliente fiel.",
+      hook: "Construí uma marca de joias do zero. 60% de conversão no live commerce.",
       heroStat: { value: "60%", label: "de conversão nas lives" },
       challenge: "Lançar uma marca de acessórios em prata 925 e Swarovski sem audiência existente, sem colchão de orçamento e sem infraestrutura pra se apoiar.",
       hypothesis: "Live commerce poderia comprimir descoberta e decisão em um único momento, se a história e o produto estivessem certos em tempo real.",
@@ -465,7 +389,7 @@ const CASES = {
     {
       slug: "quintoandar", index: "04", company: "QuintoAndar",
       role: "QA & Performance, Operações de Produto",
-      hook: "Uma rede de parceiros crescendo rápido precisava de um canal claro em vez de cinco desconectados.",
+      hook: "Lancei um app de parceiros que elevou o NPS em +5pp no primeiro mês.",
       heroStat: { value: "+5pp", label: "de NPS no primeiro mês" },
       challenge: "Parceiros não tinham um canal dedicado pra fluxo de trabalho e comunicação, criando atrito numa operação em escala acelerada e pouca visibilidade sobre o que realmente funcionava.",
       hypothesis: "Um app dedicado pros parceiros reduziria o atrito de forma mais eficaz do que mais uma rodada de ajuste de processo em ferramentas desconectadas.",
@@ -598,7 +522,7 @@ const GlobalStyles = () => (
     .btn:active { transform: scale(0.99); }
     .btn-primary { background: var(--accent); color: var(--accent-ink); }
     .btn-primary:hover { background: var(--accent-strong); box-shadow: 0 18px 46px var(--accent-glow); transform: scale(1.03); }
-    .btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+    .btn-secondary { background: var(--bg-elevated); color: var(--text); border-color: var(--border-strong); }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.03); }
     .btn-ghost { background: transparent; color: var(--text-muted); padding: 8px 4px; }
     .btn-ghost:hover { color: var(--accent); }
@@ -808,7 +732,7 @@ const GlobalStyles = () => (
     }
     .spline-bg {
       position: absolute;
-      top: 0; left: 0;
+      top: 8%; left: 0;
       width: 100%; height: 100%;
       transform: none;
       z-index: 0;
@@ -986,7 +910,6 @@ function Nav({ theme, toggleTheme, lang, toggleLang, view, goHome, activeSection
     { id: "philosophy", label: t.nav.philosophy },
     { id: "work", label: t.nav.work },
     { id: "how-i-think", label: t.nav.howIThink },
-    { id: "gtm", label: t.nav.gtm },
     { id: "contact", label: t.nav.contact },
   ];
 
@@ -1126,6 +1049,11 @@ function Hero({ t, scrollToId }) {
 
       <div className="container-rlp" style={{ position: "relative", zIndex: 2 }}>
         <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>
+            {t.hero.eyebrow}
+          </div>
+        </Reveal>
+        <Reveal delay={60}>
           <h1
             className="f-display"
             style={{ fontSize: "clamp(2.4rem, 6vw, 4.6rem)", maxWidth: 880, margin: "0 0 26px" }}
@@ -1135,7 +1063,7 @@ function Hero({ t, scrollToId }) {
             {t.hero.headlinePost}
           </h1>
         </Reveal>
-        <Reveal delay={80}>
+        <Reveal delay={120}>
           <p style={{ fontSize: "1.15rem", color: "var(--text-muted)", maxWidth: 580, lineHeight: 1.6, marginBottom: 40 }}>
             {t.hero.subtitle}
           </p>
@@ -1164,59 +1092,47 @@ function About({ t }) {
     <section id="about" className="section-rlp">
       <div className="container-rlp">
         <Reveal>
-          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.about.eyebrow}</div>
+          <div className="eyebrow" style={{ marginBottom: 28 }}>{t.about.eyebrow}</div>
         </Reveal>
         <Reveal delay={60}>
-          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 680, marginBottom: 34 }}>
-            {t.about.heading}
-          </h2>
+          <p
+            className="f-display"
+            style={{ fontSize: "clamp(1.6rem, 3.4vw, 2.4rem)", maxWidth: 820, lineHeight: 1.4, fontWeight: 400, marginBottom: 60 }}
+          >
+            {t.about.intro}
+          </p>
         </Reveal>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 48 }} className="about-grid">
-          <Reveal delay={100}>
-            <div style={{ maxWidth: 560, display: "flex", flexDirection: "column", gap: 18 }}>
-              <p style={{ color: "var(--text-muted)", fontSize: "1.08rem", lineHeight: 1.75 }}>{t.about.p1}</p>
-              <p className="f-display" style={{ fontSize: "1.25rem", lineHeight: 1.5, fontWeight: 400 }}>
-                {t.about.p2}
-              </p>
-            </div>
-          </Reveal>
-
-          <div>
-            {t.timeline.map((tl, i) => (
-              <Reveal key={i} delay={i * 60}>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "70px 1fr",
-                    gap: 20,
-                    paddingBottom: 22,
-                    paddingTop: i === 0 ? 0 : 22,
-                    borderTop: i === 0 ? "none" : "1px solid var(--border)",
-                  }}
-                >
-                  <div className="f-mono" style={{ color: "var(--text-faint)", paddingTop: 3 }}>
-                    {tl.year}
-                  </div>
-                  <div>
-                    <div className="f-display" style={{ fontSize: "1.1rem", marginBottom: 5 }}>
-                      {tl.title}
-                    </div>
-                    <div style={{ color: "var(--text-muted)", fontSize: "0.92rem", lineHeight: 1.55 }}>
-                      {tl.copy}
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
+        <Reveal delay={120}>
+          <div className="timeline-flow">
+            {t.timeline.map((step, i) => (
+              <React.Fragment key={step}>
+                <span className={`timeline-node ${i === t.timeline.length - 1 ? "is-now" : ""}`}>
+                  {step}
+                </span>
+                {i < t.timeline.length - 1 && <span className="timeline-arrow" aria-hidden="true">→</span>}
+              </React.Fragment>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
 
       <style>{`
-        @media (min-width: 1000px) {
-          .about-grid { grid-template-columns: 1fr 1fr !important; }
+        .timeline-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; }
+        .timeline-node {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 0.82rem;
+          letter-spacing: 0.03em;
+          color: var(--text);
+          border: 1px solid var(--border);
+          border-radius: 999px;
+          padding: 9px 16px;
+          white-space: nowrap;
+          transition: border-color 0.25s ease, color 0.25s ease;
         }
+        .timeline-node:hover { border-color: var(--border-strong); }
+        .timeline-node.is-now { border-color: var(--accent); color: var(--accent); }
+        .timeline-arrow { color: var(--text-faint); font-size: 0.9rem; }
       `}</style>
     </section>
   );
@@ -1626,51 +1542,7 @@ function HowIThink({ t }) {
 }
 
 /* ============================================================
-   GTM FRAMEWORK
-   ============================================================ */
-
-function GTM({ t }) {
-  return (
-    <section id="gtm" className="section-rlp">
-      <div className="container-rlp">
-        <Reveal>
-          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.gtm.eyebrow}</div>
-        </Reveal>
-        <Reveal delay={60}>
-          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 50 }}>
-            {t.gtm.heading}
-          </h2>
-        </Reveal>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 1 }} className="gtm-grid">
-          {t.gtm.items.map((g, i) => (
-            <Reveal key={g.title} delay={(i % 5) * 50}>
-              <div className="card-rlp" style={{ padding: "26px 24px", height: "100%" }}>
-                <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 12 }}>
-                  {String(i + 1).padStart(2, "0")}
-                </div>
-                <div className="f-display" style={{ fontSize: "1.08rem", marginBottom: 10 }}>{g.title}</div>
-                <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.55 }}>{g.copy}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-
-      <style>{`
-        @media (min-width: 640px) {
-          .gtm-grid { grid-template-columns: 1fr 1fr !important; gap: 14px !important; }
-        }
-        @media (min-width: 1000px) {
-          .gtm-grid { grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important; }
-        }
-      `}</style>
-    </section>
-  );
-}
-
-/* ============================================================
-   AI & DEVELOPMENT INFRASTRUCTURE
+   AI STACK
    ============================================================ */
 
 function AIInfra({ t }) {
@@ -1709,56 +1581,28 @@ function AIInfra({ t }) {
             </Reveal>
           ))}
         </div>
+
+        {t.aiInfra.note && (
+          <Reveal delay={120}>
+            <p
+              className="f-mono"
+              style={{
+                marginTop: 40,
+                color: "var(--text-faint)",
+                textTransform: "none",
+                letterSpacing: "0.02em",
+                fontSize: "0.82rem",
+              }}
+            >
+              {t.aiInfra.note}
+            </p>
+          </Reveal>
+        )}
       </div>
 
       <style>{`
         @media (min-width: 720px) {
           .ai-group-row { grid-template-columns: 200px 1fr !important; align-items: center; }
-        }
-      `}</style>
-    </section>
-  );
-}
-
-/* ============================================================
-   TOOLBOX
-   ============================================================ */
-
-function Toolbox({ t }) {
-  return (
-    <section id="toolbox" className="section-rlp">
-      <div className="container-rlp">
-        <Reveal>
-          <div className="eyebrow" style={{ marginBottom: 20 }}>{t.toolbox.eyebrow}</div>
-        </Reveal>
-        <Reveal delay={60}>
-          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 50 }}>
-            {t.toolbox.heading}
-          </h2>
-        </Reveal>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }} className="toolbox-grid">
-          {t.toolbox.groups.map((g, i) => (
-            <Reveal key={g.label} delay={i * 60}>
-              <div className="card-rlp" style={{ padding: "28px 26px", height: "100%" }}>
-                <div className="f-display" style={{ fontSize: "1.1rem", marginBottom: 16 }}>{g.label}</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  {g.items.map((item) => (
-                    <span key={item} className="pill" style={{ fontSize: "0.74rem" }}>{item}</span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-
-      <style>{`
-        @media (min-width: 720px) {
-          .toolbox-grid { grid-template-columns: 1fr 1fr !important; }
-        }
-        @media (min-width: 1080px) {
-          .toolbox-grid { grid-template-columns: 1fr 1fr 1fr !important; }
         }
       `}</style>
     </section>
@@ -1859,7 +1703,7 @@ function Footer({ t }) {
    APP — theme state, language state, client-side view routing
    ============================================================ */
 
-const SECTION_IDS = ["about", "philosophy", "work", "how-i-think", "gtm", "contact"];
+const SECTION_IDS = ["about", "philosophy", "work", "how-i-think", "contact"];
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -1936,9 +1780,7 @@ function App() {
           <Philosophy t={t} />
           <WorkGrid t={t} cases={cases} openCase={openCase} />
           <HowIThink t={t} />
-          <GTM t={t} />
           <AIInfra t={t} />
-          <Toolbox t={t} />
           <Contact t={t} />
         </main>
       ) : (
