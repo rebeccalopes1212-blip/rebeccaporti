@@ -905,8 +905,8 @@ function Nav({ theme, toggleTheme, lang, toggleLang, view, goHome, activeSection
 
   const navItems = [
     { id: "about", label: t.nav.about },
-    { id: "philosophy", label: t.nav.philosophy },
     { id: "work", label: t.nav.work },
+    { id: "philosophy", label: t.nav.philosophy },
     { id: "how-i-think", label: t.nav.howIThink },
     { id: "contact", label: t.nav.contact },
   ];
@@ -1683,7 +1683,7 @@ function Footer({ t }) {
    APP — theme state, language state, client-side view routing
    ============================================================ */
 
-const SECTION_IDS = ["about", "philosophy", "work", "how-i-think", "contact"];
+const SECTION_IDS = ["about", "work", "philosophy", "how-i-think", "contact"];
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -1757,8 +1757,8 @@ function App() {
         <main>
           <Hero t={t} scrollToId={scrollToId} />
           <About t={t} />
-          <Philosophy t={t} />
           <WorkGrid t={t} cases={cases} openCase={openCase} />
+          <Philosophy t={t} />
           <HowIThink t={t} />
           <AIInfra t={t} />
           <Contact t={t} />
