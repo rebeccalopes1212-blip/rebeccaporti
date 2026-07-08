@@ -31,7 +31,7 @@ const CONTENT = {
       backToWork: "← Back to work",
     },
     hero: {
-      eyebrow: "Rebecca Lopes",
+      eyebrow: "GTM & Product Growth",
       headlinePre: "I turn ideas into products people ",
       headlineEm: "actually adopt",
       headlinePost: ".",
@@ -120,7 +120,7 @@ const CONTENT = {
       backToWork: "← Voltar aos projetos",
     },
     hero: {
-      eyebrow: "Rebecca Lopes",
+      eyebrow: "GTM & Product Growth",
       headlinePre: "Transformo ideias em produtos que as pessoas ",
       headlineEm: "realmente adotam",
       headlinePost: ".",
@@ -208,7 +208,7 @@ const CASES = {
   en: [
     {
       slug: "refuturiza", index: "01", company: "Refuturiza",
-      role: "Product Marketing & Growth Lead",
+      role: "Product Marketing Manager",
       hook: "Built the Product Marketing function from scratch. Generated R$100K+ MRR by combining education, entertainment and AI.",
       heroStat: { value: "R$100K+", label: "monthly revenue, from zero" },
       challenge: "Refuturiza teaches Air Conditioning, Electrical, Aesthetics, and Security Camera trades: real, employable skills. But the marketing sounded like a syllabus. Gen Z scrolled past all of it.",
@@ -308,7 +308,7 @@ const CASES = {
   pt: [
     {
       slug: "refuturiza", index: "01", company: "Refuturiza",
-      role: "Head de Marketing de Produto & Growth",
+      role: "Product Marketing Manager",
       hook: "Construí a função de Marketing de Produto do zero. Gerei R$100K+ de MRR combinando educação, entretenimento e IA.",
       heroStat: { value: "R$100K+", label: "faturamento mensal, saindo do zero" },
       challenge: "A Refuturiza ensina Ar Condicionado, Elétrica, Estética e Câmeras de Segurança: profissões reais e empregáveis. Mas o marketing falava como grade curricular. A Geração Z passava direto.",
@@ -587,7 +587,14 @@ const GlobalStyles = () => (
       gap: 5px;
     }
     .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
-    .lang-toggle { width: auto; padding: 0 12px; }
+    .lang-toggle {
+      width: auto;
+      padding: 0 14px;
+      gap: 7px;
+      background: var(--bg-elevated);
+      border-color: var(--border-strong);
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
     .signal-path {
       stroke-dasharray: 900;
@@ -946,12 +953,16 @@ function Nav({ theme, toggleTheme, lang, toggleLang, view, goHome, activeSection
               {t.nav.backToWork}
             </span>
           )}
-          <button className="theme-toggle lang-toggle" onClick={toggleLang} aria-label="Toggle language">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M3 12h18M12 3c2.4 2.5 3.6 5.8 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.8-3.6-9s1.2-6.5 3.6-9z" />
-            </svg>
-            <span className="f-mono" style={{ fontSize: "0.68rem" }}>{lang.toUpperCase()}</span>
+          <button
+            className="theme-toggle lang-toggle"
+            onClick={toggleLang}
+            aria-label={lang === "pt" ? "Switch to English" : "Mudar para Português"}
+            title={lang === "pt" ? "Switch to English" : "Mudar para Português"}
+          >
+            <span aria-hidden="true" style={{ fontSize: "0.95rem", lineHeight: 1 }}>🌐</span>
+            <span className="f-mono" style={{ fontSize: "0.72rem", fontWeight: 500 }}>
+              {lang === "pt" ? "EN" : "PT"}
+            </span>
           </button>
           <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle color theme">
             {theme === "dark" ? (
@@ -1687,7 +1698,7 @@ const SECTION_IDS = ["about", "work", "philosophy", "how-i-think", "contact"];
 
 function App() {
   const [theme, setTheme] = useState("dark");
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState("pt");
   const [view, setView] = useState("home"); // 'home' | case slug
   const [activeSection, setActiveSection] = useState("about");
 
