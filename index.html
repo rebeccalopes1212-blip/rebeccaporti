@@ -82,7 +82,6 @@ const CONTENT = {
         { label: "Build & Ship", items: ["Cursor", "Lovable", "Vercel", "Supabase"] },
         { label: "Automate", items: ["Make", "Zapier"] },
       ],
-      note: "Everything on this website was built using AI-assisted workflows.",
     },
     contact: {
       eyebrow: "Get in touch",
@@ -172,7 +171,6 @@ const CONTENT = {
         { label: "Construção & Deploy", items: ["Cursor", "Lovable", "Vercel", "Supabase"] },
         { label: "Automação", items: ["Make", "Zapier"] },
       ],
-      note: "Tudo neste site foi construído usando fluxos de trabalho assistidos por IA.",
     },
     contact: {
       eyebrow: "Entre em contato",
@@ -1106,19 +1104,19 @@ function About({ t }) {
         <Reveal delay={120}>
           <div className="timeline-flow">
             {t.timeline.map((step, i) => (
-              <React.Fragment key={step}>
-                <span className={`timeline-node ${i === t.timeline.length - 1 ? "is-now" : ""}`}>
-                  {step}
-                </span>
-                {i < t.timeline.length - 1 && <span className="timeline-arrow" aria-hidden="true">→</span>}
-              </React.Fragment>
+              <span
+                key={step}
+                className={`timeline-node ${i === t.timeline.length - 1 ? "is-now" : ""}`}
+              >
+                {step}
+              </span>
             ))}
           </div>
         </Reveal>
       </div>
 
       <style>{`
-        .timeline-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; }
+        .timeline-flow { display: flex; flex-wrap: wrap; gap: 12px; }
         .timeline-node {
           font-family: 'IBM Plex Mono', monospace;
           font-size: 0.82rem;
@@ -1132,7 +1130,6 @@ function About({ t }) {
         }
         .timeline-node:hover { border-color: var(--border-strong); }
         .timeline-node.is-now { border-color: var(--accent); color: var(--accent); }
-        .timeline-arrow { color: var(--text-faint); font-size: 0.9rem; }
       `}</style>
     </section>
   );
@@ -1581,23 +1578,6 @@ function AIInfra({ t }) {
             </Reveal>
           ))}
         </div>
-
-        {t.aiInfra.note && (
-          <Reveal delay={120}>
-            <p
-              className="f-mono"
-              style={{
-                marginTop: 40,
-                color: "var(--text-faint)",
-                textTransform: "none",
-                letterSpacing: "0.02em",
-                fontSize: "0.82rem",
-              }}
-            >
-              {t.aiInfra.note}
-            </p>
-          </Reveal>
-        )}
       </div>
 
       <style>{`
