@@ -73,12 +73,12 @@ const CONTENT = {
         {
           tag: "Phase 1",
           title: "Tactical Diagnosis",
-          body: "A full audit of the user journey. SQL queries structure Cohort Analysis to isolate customer cohorts. The goal is to pinpoint the exact drop-off moments and segment the base, separating high-value profiles from those at imminent risk of churn, building the data foundation for our experiments.",
+          body: "A full audit of the journey combining quantitative and qualitative data. SQL queries structure Cohort Analysis and map drop-off, cross-referencing these metrics with deep UGC (User-Generated Content) analysis. The goal is to isolate customer cohorts and understand the real reasons behind churn, building a rich data foundation to guide our experiments.",
         },
         {
           tag: "Phase 2",
           title: "Automation & Relationship",
-          body: "Implementation of hyper-segmented communication flows via Klaviyo. Win-back and onboarding flows triggered by behavioral signals mapped in Phase 1. Rigorous use of the ICE framework (Impact, Confidence, Effort) to prioritize the experiments that plug the 'leaky buckets' at the lowest operational cost.",
+          body: "Implementation of hyper-segmented flows via Klaviyo. Win-back flows triggered by behavioral signals, incorporating UGC as dynamic social proof and establishing automated feedback loops that continuously feed our strategies. Applying the ICE framework (Impact, Confidence, Effort) to prioritize high-ROI experiments.",
         },
         {
           tag: "Phase 3",
@@ -185,12 +185,12 @@ const CONTENT = {
         {
           tag: "Fase 1",
           title: "Diagnóstico Tático",
-          body: "Auditoria completa da jornada do usuário. Utilização de queries SQL para estruturar Cohort Analysis e isolar safras de clientes. O objetivo é identificar os momentos exatos de drop-off e segmentar a base, separando perfis de alto valor daqueles com risco iminente de churn, criando o alicerce de dados para nossos testes.",
+          body: "Auditoria completa da jornada combinando dados quantitativos e qualitativos. Utilização de queries SQL para estruturar Cohort Analysis e mapear o drop-off, cruzando essas métricas com a análise profunda de UGC (User-Generated Content). O objetivo é isolar safras de clientes e entender os motivos reais de churn, criando um alicerce de dados rico para guiar nossos testes.",
         },
         {
           tag: "Fase 2",
           title: "Automação e Relacionamento",
-          body: "Implementação de réguas de comunicação hiper-segmentadas via Klaviyo. Criação de fluxos de win-back e onboarding acionados por gatilhos comportamentais mapeados na Fase 1. Aplicação rigorosa do framework ICE (Impacto, Confiança, Esforço) para priorizar experimentos que fechem os 'baldes furados' com o menor custo operacional.",
+          body: "Implementação de réguas hiper-segmentadas via Klaviyo. Criação de fluxos de win-back acionados por gatilhos comportamentais, incorporando UGC como prova social dinâmica e estabelecendo loops automatizados de feedback para retroalimentar continuamente nossas estratégias. Aplicação do framework ICE (Impacto, Confiança, Esforço) para priorizar experimentos de alto ROI.",
         },
         {
           tag: "Fase 3",
@@ -1609,7 +1609,7 @@ function ActionPlan({ t }) {
     <section id="action-plan" className="section-rlp">
       <div className="container-rlp">
         <Reveal>
-          <div className="eyebrow" style={{ marginBottom: 20 }}>{ap.eyebrow}</div>
+          <div className="ap-eyebrow f-display">{ap.eyebrow}</div>
         </Reveal>
         <Reveal delay={60}>
           <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 760, marginBottom: 18 }}>
@@ -1655,11 +1655,11 @@ function ActionPlan({ t }) {
               {String(active + 1).padStart(2, "0")}
             </div>
             <div className="ap-panel-body" key={active}>
-              <div className="f-mono" style={{ color: "var(--accent)", marginBottom: 10 }}>{phase.tag}</div>
-              <h3 className="f-display" style={{ fontSize: "clamp(1.4rem, 3vw, 1.9rem)", marginBottom: 16 }}>
+              <div className="f-mono ap-phase-tag" style={{ marginBottom: 10 }}>{phase.tag}</div>
+              <h3 className="f-display ap-phase-title" style={{ fontSize: "clamp(1.4rem, 3vw, 1.9rem)", marginBottom: 16 }}>
                 {phase.title}
               </h3>
-              <p style={{ color: "var(--text-muted)", fontSize: "1.05rem", lineHeight: 1.7, maxWidth: 640 }}>
+              <p className="ap-body" style={{ fontSize: "1.05rem", lineHeight: 1.7, maxWidth: 640 }}>
                 {phase.body}
               </p>
             </div>
@@ -1668,6 +1668,26 @@ function ActionPlan({ t }) {
       </div>
 
       <style>{`
+        /* Happy Aging brand palette, scoped to this section only */
+        #action-plan {
+          --ap-red: #E4322B;
+          --ap-cream: #ECE3D2;
+          --ap-red-glow: rgba(228, 50, 43, 0.26);
+        }
+        .rlp-root[data-theme='light'] #action-plan {
+          --ap-red: #C82A22;
+          --ap-cream: #5A4A39;
+          --ap-red-glow: rgba(200, 42, 34, 0.16);
+        }
+
+        .ap-eyebrow {
+          font-style: italic;
+          font-size: 1.15rem;
+          color: var(--ap-red);
+          margin-bottom: 16px;
+          letter-spacing: 0.01em;
+        }
+
         .ap-tabs { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
         .ap-tab {
           display: flex; align-items: center; gap: 16px;
@@ -1676,12 +1696,17 @@ function ActionPlan({ t }) {
           border-radius: 14px;
           background: var(--surface);
           border: 1px solid var(--border);
+          border-bottom: 3px solid var(--border);
           color: var(--text);
           cursor: pointer;
           transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), border-color 0.25s ease, box-shadow 0.3s ease, background 0.25s ease;
         }
         .ap-tab:hover { border-color: var(--border-strong); transform: translateY(-2px); }
-        .ap-tab.is-active { border-color: var(--accent); box-shadow: 0 12px 34px var(--accent-glow); }
+        .ap-tab.is-active {
+          border-color: var(--border-strong);
+          border-bottom-color: var(--ap-red);
+          box-shadow: 0 12px 34px var(--ap-red-glow);
+        }
         .ap-tab-num {
           width: 42px; height: 42px; flex-shrink: 0;
           display: flex; align-items: center; justify-content: center;
@@ -1692,11 +1717,11 @@ function ActionPlan({ t }) {
           transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
         }
         .ap-tab.is-active .ap-tab-num {
-          background: var(--accent); color: var(--accent-ink); border-color: var(--accent);
+          background: var(--ap-red); color: #FFFFFF; border-color: var(--ap-red);
         }
         .ap-tab-labels { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
         .ap-tab-tag { color: var(--text-faint); font-size: 0.66rem; }
-        .ap-tab.is-active .ap-tab-tag { color: var(--accent); }
+        .ap-tab.is-active .ap-tab-tag { color: var(--ap-red); }
         .ap-tab-title { font-size: 1.02rem; }
 
         .ap-panel {
@@ -1704,7 +1729,10 @@ function ActionPlan({ t }) {
           align-items: start;
           padding: 32px 28px;
         }
-        .ap-panel-num { font-size: clamp(2.8rem, 9vw, 4.4rem); line-height: 0.9; color: var(--accent); opacity: 0.92; }
+        .ap-panel-num { font-size: clamp(2.8rem, 9vw, 4.4rem); line-height: 0.9; color: var(--ap-red); opacity: 0.92; }
+        .ap-phase-tag { color: var(--ap-red); }
+        .ap-phase-title { color: var(--ap-red); }
+        .ap-body { color: var(--ap-cream); }
         .ap-panel-body { animation: apFade 0.5s cubic-bezier(0.22,1,0.36,1); }
         @keyframes apFade {
           from { opacity: 0; transform: translateY(10px); }
