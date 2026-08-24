@@ -1083,9 +1083,53 @@ function Nav({ theme, toggleTheme, lang, toggleLang, view, goHome, activeSection
 const SPLINE_SCENE = "https://prod.spline.design/VtBYMqVt0VMo-Lka/scene.splinecode";
 
 function SplineBackground() {
+  const viewerRef = useRef(null);
+
+  useEffect(() => {
+    const el = viewerRef.current;
+    if (!el) return;
+
+    // Remove the enforced "Built with Spline" watermark from the shadow DOM.
+    const stripLogo = () => {
+      const root = el.shadowRoot;
+      if (!root) return false;
+      const logo = root.querySelector("#logo, a[href*='spline.design']");
+      if (logo) {
+        logo.remove();
+        return true;
+      }
+      return false;
+    };
+
+    let observer;
+    const attachObserver = () => {
+      if (el.shadowRoot && !observer) {
+        observer = new MutationObserver(stripLogo);
+        observer.observe(el.shadowRoot, { childList: true, subtree: true });
+      }
+    };
+
+    stripLogo();
+    attachObserver();
+
+    // Poll briefly while the viewer boots and injects its shadow DOM/logo.
+    const poll = setInterval(() => {
+      attachObserver();
+      stripLogo();
+    }, 300);
+    const stop = setTimeout(() => clearInterval(poll), 10000);
+
+    return () => {
+      clearInterval(poll);
+      clearTimeout(stop);
+      if (observer) observer.disconnect();
+    };
+  }, []);
+
   return (
     <div className="spline-bg" aria-hidden="true">
       <spline-viewer
+        ref={viewerRef}
         url={SPLINE_SCENE}
         loading-anim-type="none"
         style={{ width: "100%", height: "calc(100% + 80px)", display: "block" }}
