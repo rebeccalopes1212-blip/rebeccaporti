@@ -26,6 +26,7 @@ const CONTENT = {
       about: "About",
       philosophy: "Philosophy",
       work: "Work",
+      actionPlan: "Case: Action Plan",
       howIThink: "How I Think",
       contact: "Contact",
       backToWork: "← Back to work",
@@ -63,6 +64,28 @@ const CONTENT = {
       heading: "A few things I've built.",
       readCase: "Read case →",
       inProgress: "In progress",
+    },
+    actionPlan: {
+      eyebrow: "Case · Happy Aging",
+      title: "Tactical Growth & Retention Plan",
+      description: "An agile execution strategy split into phases, focused on churn diagnosis, automation, and increasing Lifetime Value (LTV).",
+      phases: [
+        {
+          tag: "Phase 1",
+          title: "Tactical Diagnosis",
+          body: "A deep dive into current retention data to map the exact churn bottlenecks and isolate cohorts through Cohort Analysis.",
+        },
+        {
+          tag: "Phase 2",
+          title: "Automation & Relationship",
+          body: "Structuring robust automations with Klaviyo. Building personalized relationship flows to \"plug the leaky buckets\" and win back inactive users.",
+        },
+        {
+          tag: "Phase 3",
+          title: "Scale & LTV Focus",
+          body: "Traction directed at increasing Lifetime Value. Optimizing campaigns to drive repeat purchases, extend time in the base, and ensure the sustainability of acquisition.",
+        },
+      ],
     },
     howIThink: {
       eyebrow: "How I think",
@@ -115,6 +138,7 @@ const CONTENT = {
       about: "Sobre",
       philosophy: "Filosofia",
       work: "Projetos",
+      actionPlan: "Case: Plano de Ação",
       howIThink: "Como Penso",
       contact: "Contato",
       backToWork: "← Voltar aos projetos",
@@ -152,6 +176,28 @@ const CONTENT = {
       heading: "Algumas coisas que construí.",
       readCase: "Ver estudo de caso →",
       inProgress: "Em andamento",
+    },
+    actionPlan: {
+      eyebrow: "Case · Happy Aging",
+      title: "Plano Tático de Growth & Retenção",
+      description: "Estratégia de execução ágil dividida em fases, com foco em diagnóstico de churn, automação e aumento do Lifetime Value (LTV).",
+      phases: [
+        {
+          tag: "Fase 1",
+          title: "Diagnóstico Tático",
+          body: "Mergulho profundo nos dados atuais de retenção para mapear os gargalos exatos da perda de clientes (churn) e isolar safras via Cohort Analysis.",
+        },
+        {
+          tag: "Fase 2",
+          title: "Automação e Relacionamento",
+          body: "Estruturação de automações robustas utilizando Klaviyo. Criação de réguas de relacionamento personalizadas para \"fechar os baldes furados\" e recuperar usuários inativos.",
+        },
+        {
+          tag: "Fase 3",
+          title: "Escala e Foco no LTV",
+          body: "Tração direcionada para o aumento do Lifetime Value. Otimização de campanhas com foco em fazer o cliente comprar de novo, aumentar o tempo de permanência na base e garantir a sustentabilidade da aquisição.",
+        },
+      ],
     },
     howIThink: {
       eyebrow: "Como penso",
@@ -913,6 +959,7 @@ function Nav({ theme, toggleTheme, lang, toggleLang, view, goHome, activeSection
   const navItems = [
     { id: "about", label: t.nav.about },
     { id: "work", label: t.nav.work },
+    { id: "action-plan", label: t.nav.actionPlan },
     { id: "philosophy", label: t.nav.philosophy },
     { id: "how-i-think", label: t.nav.howIThink },
     { id: "contact", label: t.nav.contact },
@@ -1550,6 +1597,130 @@ function HowIThink({ t }) {
 }
 
 /* ============================================================
+   ACTION PLAN — interactive phased case (tabs + stepper)
+   ============================================================ */
+
+function ActionPlan({ t }) {
+  const ap = t.actionPlan;
+  const [active, setActive] = useState(0);
+  const phase = ap.phases[active];
+
+  return (
+    <section id="action-plan" className="section-rlp">
+      <div className="container-rlp">
+        <Reveal>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>{ap.eyebrow}</div>
+        </Reveal>
+        <Reveal delay={60}>
+          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 760, marginBottom: 18 }}>
+            {ap.title}
+          </h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p style={{ color: "var(--text-muted)", maxWidth: 640, lineHeight: 1.65, marginBottom: 46 }}>
+            {ap.description}
+          </p>
+        </Reveal>
+
+        <Reveal delay={140}>
+          <div className="ap-tabs" role="tablist" aria-label={ap.title}>
+            {ap.phases.map((p, i) => (
+              <button
+                key={p.tag}
+                role="tab"
+                id={`ap-tab-${i}`}
+                aria-selected={active === i}
+                aria-controls="ap-panel"
+                className={`ap-tab ${active === i ? "is-active" : ""}`}
+                onClick={() => setActive(i)}
+              >
+                <span className="ap-tab-num f-mono">{String(i + 1).padStart(2, "0")}</span>
+                <span className="ap-tab-labels">
+                  <span className="f-mono ap-tab-tag">{p.tag}</span>
+                  <span className="f-display ap-tab-title">{p.title}</span>
+                </span>
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={180}>
+          <div
+            className="ap-panel card-rlp"
+            id="ap-panel"
+            role="tabpanel"
+            aria-labelledby={`ap-tab-${active}`}
+          >
+            <div className="ap-panel-num f-display" aria-hidden="true">
+              {String(active + 1).padStart(2, "0")}
+            </div>
+            <div className="ap-panel-body" key={active}>
+              <div className="f-mono" style={{ color: "var(--accent)", marginBottom: 10 }}>{phase.tag}</div>
+              <h3 className="f-display" style={{ fontSize: "clamp(1.4rem, 3vw, 1.9rem)", marginBottom: 16 }}>
+                {phase.title}
+              </h3>
+              <p style={{ color: "var(--text-muted)", fontSize: "1.05rem", lineHeight: 1.7, maxWidth: 640 }}>
+                {phase.body}
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+
+      <style>{`
+        .ap-tabs { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 24px; }
+        .ap-tab {
+          display: flex; align-items: center; gap: 16px;
+          text-align: left; width: 100%;
+          padding: 18px 20px;
+          border-radius: 14px;
+          background: var(--surface);
+          border: 1px solid var(--border);
+          color: var(--text);
+          cursor: pointer;
+          transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), border-color 0.25s ease, box-shadow 0.3s ease, background 0.25s ease;
+        }
+        .ap-tab:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+        .ap-tab.is-active { border-color: var(--accent); box-shadow: 0 12px 34px var(--accent-glow); }
+        .ap-tab-num {
+          width: 42px; height: 42px; flex-shrink: 0;
+          display: flex; align-items: center; justify-content: center;
+          border-radius: 999px;
+          border: 1px solid var(--border-strong);
+          color: var(--text-faint);
+          font-size: 0.8rem;
+          transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+        .ap-tab.is-active .ap-tab-num {
+          background: var(--accent); color: var(--accent-ink); border-color: var(--accent);
+        }
+        .ap-tab-labels { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+        .ap-tab-tag { color: var(--text-faint); font-size: 0.66rem; }
+        .ap-tab.is-active .ap-tab-tag { color: var(--accent); }
+        .ap-tab-title { font-size: 1.02rem; }
+
+        .ap-panel {
+          display: grid; grid-template-columns: 1fr; gap: 18px;
+          align-items: start;
+          padding: 32px 28px;
+        }
+        .ap-panel-num { font-size: clamp(2.8rem, 9vw, 4.4rem); line-height: 0.9; color: var(--accent); opacity: 0.92; }
+        .ap-panel-body { animation: apFade 0.5s cubic-bezier(0.22,1,0.36,1); }
+        @keyframes apFade {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: none; }
+        }
+
+        @media (min-width: 760px) {
+          .ap-tabs { grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+          .ap-panel { grid-template-columns: auto 1fr; gap: 34px; padding: 40px 38px; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/* ============================================================
    AI STACK
    ============================================================ */
 
@@ -1694,7 +1865,7 @@ function Footer({ t }) {
    APP — theme state, language state, client-side view routing
    ============================================================ */
 
-const SECTION_IDS = ["about", "work", "philosophy", "how-i-think", "contact"];
+const SECTION_IDS = ["about", "work", "action-plan", "philosophy", "how-i-think", "contact"];
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -1769,6 +1940,7 @@ function App() {
           <Hero t={t} scrollToId={scrollToId} />
           <About t={t} />
           <WorkGrid t={t} cases={cases} openCase={openCase} />
+          <ActionPlan t={t} />
           <Philosophy t={t} />
           <HowIThink t={t} />
           <AIInfra t={t} />
