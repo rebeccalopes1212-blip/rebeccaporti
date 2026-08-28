@@ -63,6 +63,12 @@ const CONTENT = {
       heading: "A few things I've built.",
       readCase: "Read case →",
       inProgress: "In progress",
+      instagramLabel: "Instagram",
+      featured: {
+        eyebrow: "Latest activation",
+        title: "Case Refuturiza: Sabadão de Todos (Band)",
+        caption: "Live TV activation on Band",
+      },
     },
     howIThink: {
       eyebrow: "How I think",
@@ -90,6 +96,7 @@ const CONTENT = {
       headingPost: ".",
       emailBtn: "Email me",
       linkedinBtn: "Connect on LinkedIn",
+      followLabel: "Follow",
       nameLabel: "Name",
       basedLabel: "Based in",
       emailLabel: "Email",
@@ -152,6 +159,12 @@ const CONTENT = {
       heading: "Algumas coisas que construí.",
       readCase: "Ver estudo de caso →",
       inProgress: "Em andamento",
+      instagramLabel: "Instagram",
+      featured: {
+        eyebrow: "Ação mais recente",
+        title: "Case Refuturiza: Sabadão de Todos (Band)",
+        caption: "Ativação ao vivo na TV Band",
+      },
     },
     howIThink: {
       eyebrow: "Como penso",
@@ -179,6 +192,7 @@ const CONTENT = {
       headingPost: ".",
       emailBtn: "Me mandar um email",
       linkedinBtn: "Conectar no LinkedIn",
+      followLabel: "Siga",
       nameLabel: "Nome",
       basedLabel: "Localização",
       emailLabel: "Email",
@@ -233,6 +247,7 @@ const CASES = {
       secondaryVideoLabel: "Viral podcast shorts",
       tiktokUrl: "https://vt.tiktok.com/ZSC7Nv3Da/",
       tiktokLabel: "Viral proof on TikTok",
+      instagram: "https://www.instagram.com/refuturiza.campusbelavista/",
       status: "live",
     },
     {
@@ -301,6 +316,7 @@ const CASES = {
         { value: "↑", label: "Partner engagement and app adoption" },
       ],
       lessons: "The best product operations work is invisible when it's done right. Partners just noticed things stopped breaking.",
+      instagram: "https://www.instagram.com/quintoandar/",
       status: "live",
     },
   ],
@@ -333,6 +349,7 @@ const CASES = {
       secondaryVideoLabel: "Shorts virais do podcast",
       tiktokUrl: "https://vt.tiktok.com/ZSC7Nv3Da/",
       tiktokLabel: "Prova viral no TikTok",
+      instagram: "https://www.instagram.com/refuturiza.campusbelavista/",
       status: "live",
     },
     {
@@ -401,6 +418,7 @@ const CASES = {
         { value: "↑", label: "Engajamento e adoção dos parceiros" },
       ],
       lessons: "O melhor trabalho de operações de produto é invisível quando bem feito. Os parceiros só notaram que as coisas pararam de quebrar.",
+      instagram: "https://www.instagram.com/quintoandar/",
       status: "live",
     },
   ],
@@ -622,6 +640,29 @@ const GlobalStyles = () => (
       color: var(--text-faint);
     }
 
+    .ig-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+      transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ig-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    /* featured inline video card keeps its footprint stable while playing */
+    .featured-video:hover { transform: none; box-shadow: none; border-color: var(--border); }
+
     .result-stat-card {
       border-top: 3px solid var(--accent);
       background: var(--surface);
@@ -723,16 +764,16 @@ const GlobalStyles = () => (
 
     /* ---- Hero: Spline 3D background ---- */
     .hero-rlp {
-      min-height: 100vh;
+      min-height: auto;
       display: flex;
       align-items: flex-start;
       isolation: isolate;
       padding-top: 110px;
     }
-    /* physical "stage" below the CTAs so the 3D wave has room to breathe */
-    .hero-rlp .container-rlp { padding-bottom: 220px; }
+    /* modest "stage" below the CTAs so the 3D wave has room to breathe */
+    .hero-rlp .container-rlp { padding-bottom: 130px; }
     @media (min-width: 768px) {
-      .hero-rlp { padding-top: 160px; align-items: center; }
+      .hero-rlp { min-height: 100vh; padding-top: 160px; align-items: center; }
       .hero-rlp .container-rlp { padding-bottom: 100px; }
     }
     .spline-bg {
@@ -1257,9 +1298,42 @@ function WorkGrid({ t, cases, openCase }) {
           <div className="eyebrow" style={{ marginBottom: 20 }}>{t.work.eyebrow}</div>
         </Reveal>
         <Reveal delay={60}>
-          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 50 }}>
+          <h2 className="f-display" style={{ fontSize: "clamp(1.9rem, 4vw, 2.8rem)", maxWidth: 720, marginBottom: 40 }}>
             {t.work.heading}
           </h2>
+        </Reveal>
+
+        <Reveal delay={90}>
+          <div className="card-rlp featured-video" style={{ padding: "26px 24px", marginBottom: 30 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 16, flexWrap: "wrap", marginBottom: 18 }}>
+              <div>
+                <div className="eyebrow" style={{ marginBottom: 10 }}>{t.work.featured.eyebrow}</div>
+                <div className="f-display" style={{ fontSize: "clamp(1.15rem, 2.6vw, 1.5rem)", lineHeight: 1.25 }}>
+                  {t.work.featured.title}
+                </div>
+              </div>
+              <a
+                className="ig-link"
+                href="https://www.instagram.com/refuturiza.campusbelavista/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${t.work.instagramLabel} · Refuturiza`}
+                title={`${t.work.instagramLabel} · Refuturiza`}
+              >
+                <InstagramMark />
+              </a>
+            </div>
+            <div className="media-embed">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/IIBTYG_mmU8"
+                title={t.work.featured.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+            <div className="media-caption">{t.work.featured.caption}</div>
+          </div>
         </Reveal>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20 }} className="work-grid">
@@ -1275,9 +1349,24 @@ function WorkGrid({ t, cases, openCase }) {
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 22 }}>
                   <span className="case-card-num">{c.index}</span>
-                  {c.status === "progress" && (
-                    <span className="pill" style={{ fontSize: "0.68rem", padding: "5px 10px" }}>{t.work.inProgress}</span>
-                  )}
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    {c.status === "progress" && (
+                      <span className="pill" style={{ fontSize: "0.68rem", padding: "5px 10px" }}>{t.work.inProgress}</span>
+                    )}
+                    {c.instagram && (
+                      <a
+                        className="ig-link"
+                        href={c.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        aria-label={`${t.work.instagramLabel} · ${c.company}`}
+                        title={`${t.work.instagramLabel} · ${c.company}`}
+                      >
+                        <InstagramMark />
+                      </a>
+                    )}
+                  </div>
                 </div>
                 <div className="f-display" style={{ fontSize: "1.4rem", marginBottom: 8 }}>{c.company}</div>
                 <div className="f-mono" style={{ color: "var(--text-faint)", marginBottom: 16, textTransform: "none", letterSpacing: "0.02em" }}>
@@ -1328,6 +1417,16 @@ function TikTokMark({ size = 34 }) {
         d="M16.5 3c.28 2.02 1.42 3.62 3.5 4v2.35c-1.28.04-2.5-.33-3.6-1v6.09c0 3.06-2.32 5.56-5.38 5.56A5.4 5.4 0 0 1 5.6 14.6a5.36 5.36 0 0 1 6.02-5.33v2.5a2.9 2.9 0 0 0-3.5 2.83 2.86 2.86 0 0 0 2.9 2.86c1.62 0 2.88-1.29 2.88-2.9V3h2.6z"
         fill="currentColor"
       />
+    </svg>
+  );
+}
+
+function InstagramMark({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="3" width="18" height="18" rx="5.2" stroke="currentColor" strokeWidth="1.7" />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.7" />
+      <circle cx="17.3" cy="6.7" r="1.15" fill="currentColor" />
     </svg>
   );
 }
@@ -1671,12 +1770,30 @@ function Contact({ t }) {
         </Reveal>
 
         <Reveal delay={120}>
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 60 }}>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 26 }}>
             <a className="btn btn-primary" href={`mailto:${CONTACT_INFO.email}`}>
               {t.contact.emailBtn}
             </a>
             <a className="btn btn-secondary" href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer">
               {t.contact.linkedinBtn}
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal delay={150}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 60 }}>
+            <span className="f-mono" style={{ color: "var(--text-faint)", fontSize: "0.8rem" }}>
+              {t.contact.followLabel}
+            </span>
+            <a
+              className="pill"
+              href="https://www.instagram.com/happyaging/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ alignItems: "center", gap: 8, fontSize: "0.8rem" }}
+            >
+              <InstagramMark size={15} />
+              Happy Aging
             </a>
           </div>
         </Reveal>
