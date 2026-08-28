@@ -63,7 +63,7 @@ const CONTENT = {
       heading: "A few things I've built.",
       readCase: "Read case →",
       inProgress: "In progress",
-      instagramLabel: "Instagram",
+      instagramLabel: "View Instagram",
       featured: {
         eyebrow: "Latest activation",
         title: "Case Refuturiza: Sabadão de Todos (Band)",
@@ -96,7 +96,6 @@ const CONTENT = {
       headingPost: ".",
       emailBtn: "Email me",
       linkedinBtn: "Connect on LinkedIn",
-      followLabel: "Follow",
       nameLabel: "Name",
       basedLabel: "Based in",
       emailLabel: "Email",
@@ -159,7 +158,7 @@ const CONTENT = {
       heading: "Algumas coisas que construí.",
       readCase: "Ver estudo de caso →",
       inProgress: "Em andamento",
-      instagramLabel: "Instagram",
+      instagramLabel: "Ver Instagram",
       featured: {
         eyebrow: "Ação mais recente",
         title: "Case Refuturiza: Sabadão de Todos (Band)",
@@ -192,7 +191,6 @@ const CONTENT = {
       headingPost: ".",
       emailBtn: "Me mandar um email",
       linkedinBtn: "Conectar no LinkedIn",
-      followLabel: "Siga",
       nameLabel: "Nome",
       basedLabel: "Localização",
       emailLabel: "Email",
@@ -643,19 +641,24 @@ const GlobalStyles = () => (
     .ig-link {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
+      gap: 7px;
       flex-shrink: 0;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
       color: var(--text-muted);
       background: var(--bg-elevated);
-      transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
     }
+    .ig-link svg { flex-shrink: 0; }
     .ig-link:hover {
       color: var(--accent);
       border-color: var(--accent);
+      background: var(--accent-glow);
       transform: translateY(-2px);
       box-shadow: var(--shadow);
     }
@@ -770,8 +773,8 @@ const GlobalStyles = () => (
       isolation: isolate;
       padding-top: 110px;
     }
-    /* modest "stage" below the CTAs so the 3D wave has room to breathe */
-    .hero-rlp .container-rlp { padding-bottom: 130px; }
+    /* small breathing room on mobile so "About" flows right under the CTAs */
+    .hero-rlp .container-rlp { padding-bottom: 48px; }
     @media (min-width: 768px) {
       .hero-rlp { min-height: 100vh; padding-top: 160px; align-items: center; }
       .hero-rlp .container-rlp { padding-bottom: 100px; }
@@ -1320,7 +1323,8 @@ function WorkGrid({ t, cases, openCase }) {
                 aria-label={`${t.work.instagramLabel} · Refuturiza`}
                 title={`${t.work.instagramLabel} · Refuturiza`}
               >
-                <InstagramMark />
+                <InstagramMark size={15} />
+                {t.work.instagramLabel}
               </a>
             </div>
             <div className="media-embed">
@@ -1341,11 +1345,13 @@ function WorkGrid({ t, cases, openCase }) {
             <Reveal key={c.slug} delay={i * 70}>
               <div
                 className="card-rlp"
-                style={{ padding: "30px 28px", cursor: "pointer", height: "100%", display: "flex", flexDirection: "column" }}
-                onClick={() => openCase(c.slug)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === "Enter") openCase(c.slug); }}
+                style={{ padding: "30px 28px", cursor: c.instaOnly ? "default" : "pointer", height: "100%", display: "flex", flexDirection: "column" }}
+                {...(c.instaOnly ? {} : {
+                  onClick: () => openCase(c.slug),
+                  role: "button",
+                  tabIndex: 0,
+                  onKeyDown: (e) => { if (e.key === "Enter") openCase(c.slug); },
+                })}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 22 }}>
                   <span className="case-card-num">{c.index}</span>
@@ -1363,7 +1369,8 @@ function WorkGrid({ t, cases, openCase }) {
                         aria-label={`${t.work.instagramLabel} · ${c.company}`}
                         title={`${t.work.instagramLabel} · ${c.company}`}
                       >
-                        <InstagramMark />
+                        <InstagramMark size={15} />
+                        {t.work.instagramLabel}
                       </a>
                     )}
                   </div>
@@ -1382,7 +1389,9 @@ function WorkGrid({ t, cases, openCase }) {
                     </div>
                     <div style={{ fontSize: "0.78rem", color: "var(--text-faint)" }}>{c.heroStat.label}</div>
                   </div>
-                  <span className="f-mono" style={{ color: "var(--text-muted)" }}>{t.work.readCase}</span>
+                  {!c.instaOnly && (
+                    <span className="f-mono" style={{ color: "var(--text-muted)" }}>{t.work.readCase}</span>
+                  )}
                 </div>
               </div>
             </Reveal>
@@ -1770,30 +1779,12 @@ function Contact({ t }) {
         </Reveal>
 
         <Reveal delay={120}>
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 26 }}>
+          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 60 }}>
             <a className="btn btn-primary" href={`mailto:${CONTACT_INFO.email}`}>
               {t.contact.emailBtn}
             </a>
             <a className="btn btn-secondary" href={CONTACT_INFO.linkedin} target="_blank" rel="noopener noreferrer">
               {t.contact.linkedinBtn}
-            </a>
-          </div>
-        </Reveal>
-
-        <Reveal delay={150}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 60 }}>
-            <span className="f-mono" style={{ color: "var(--text-faint)", fontSize: "0.8rem" }}>
-              {t.contact.followLabel}
-            </span>
-            <a
-              className="pill"
-              href="https://www.instagram.com/happyaging/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ alignItems: "center", gap: 8, fontSize: "0.8rem" }}
-            >
-              <InstagramMark size={15} />
-              Happy Aging
             </a>
           </div>
         </Reveal>
